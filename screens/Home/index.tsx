@@ -42,7 +42,7 @@ const Home = () => {
 
   return (
     <WebView
-      source={{uri: 'http://localhost:3000'}}
+      source={{uri: 'https://development.web-user-c1x.pages.dev/'}}
       ref={ref}
       onNavigationStateChange={e => setNavState(e)}
     />

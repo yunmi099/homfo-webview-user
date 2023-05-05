@@ -61,7 +61,7 @@ function MainScreen() {
 function SearchScreen() {
   return(
   <WebView
-    source={{uri: 'http://localhost:3000/map'}}
+    source={{uri: 'https://dev-webview.ajou-only-five.shop/map'}}
     javaScriptEnabled={true}
     useWebKit={true}
     />);     
