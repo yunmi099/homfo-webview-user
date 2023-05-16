@@ -5,7 +5,7 @@ const Login = ({ navigation }) => {
   const [verify, setVerify]= useState(false);
   return (
     <Container>
-        <View style={{flexDirection:'row'}}>
+        <View style={{flexDirection:'row', marginTop: 20}}>
           <StyledTextInput
             placeholder="전화번호를 입력해주세요"
           />
