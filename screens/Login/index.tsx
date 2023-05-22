@@ -20,7 +20,7 @@ const Login = ({ navigation }) => {
           <StyledTextInput
             placeholder="인증번호를 입력해주세요"
           />
-          <StyledButton set={true}  onPress={() => navigation.navigate('Main')}> 
+          <StyledButton set={true}  onPress={() => navigation.navigate('Home')}> 
             <ButtonText set={true}>
               인증번호 확인
             </ButtonText>
