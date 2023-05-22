@@ -79,7 +79,7 @@ const Register = ({ navigation }) => {
         />
         {job==="기타"?<StyledTextInput placeholder={"20자 이내로 작성해주세요"} autoCorrect={false} maxLength={20} autoCapitalize={"none"}/>:null}
       </Block>
-      <StyledButton onPress={() => navigation.navigate('Main')}> 
+      <StyledButton onPress={() => navigation.navigate('Home')}> 
         <ButtonText>
           가입하기
         </ButtonText>

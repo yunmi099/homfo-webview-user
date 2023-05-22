@@ -5,7 +5,7 @@ const Login = ({ navigation }) => {
   const [verify, setVerify]= useState(false);
   return (
     <Container>
-        <View style={{flexDirection:'row'}}>
+        <View style={{flexDirection:'row', marginTop: 20}}>
           <StyledTextInput
             placeholder="전화번호를 입력해주세요"
           />
@@ -20,7 +20,7 @@ const Login = ({ navigation }) => {
           <StyledTextInput
             placeholder="인증번호를 입력해주세요"
           />
-          <StyledButton set={true}  onPress={() => navigation.navigate('Main')}> 
+          <StyledButton set={true}  onPress={() => navigation.navigate('Home')}> 
             <ButtonText set={true}>
               인증번호 확인
             </ButtonText>
