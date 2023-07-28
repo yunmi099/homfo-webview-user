@@ -1,51 +1,62 @@
-import React, { useState } from "react";
-import { Pressable, StyleSheet, Text, View } from "react-native";
-import { format } from "date-fns";
-import ko from "date-fns/esm/locale/ko/index.js";
+import React, { useEffect, useState } from "react";
+import { Pressable, View } from "react-native";
+import { format, formatISO } from "date-fns";
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import { StyledView, StyledText } from "./style";
+import '../interface';
+import { ko } from "date-fns/locale";
 
-function DatePickerModal() {
-  const [date, onChangeDate] = useState(null); 
-  const [visible, setVisible] = useState(false);
-  
+interface DatePickerModalProps {
+  setBirth: React.Dispatch<React.SetStateAction<UserFormData>>;
+}
+const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
   const todayDate = new Date();
   const year = todayDate.getFullYear();
-    const adultYear = year - 19;
-
+  const adultYear = year - 19;
   const maxDate = new Date(adultYear, 11, 31);
-  const onPressDate = () => { 
-    setVisible(true); 
+  const [date, onChangeDate] = useState(maxDate);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    setBirth((prevFormData) => ({
+      ...prevFormData,
+      "dateOfBirth": formatISO(maxDate),
+    }));
+  }, []);
+
+  const onPressDate = () => {
+    setVisible(true);
   };
-  const onConfirm = (selectedDate: Date) => { 
-    setVisible(false); 
-    onChangeDate(selectedDate); 
+
+  const onConfirm = (selectedDate: Date) => {
+    setVisible(false);
+    setBirth((prevFormData) => ({
+      ...prevFormData,
+      "dateOfBirth": formatISO(selectedDate),
+    }));
+    onChangeDate(selectedDate);
   };
-  const onCancel = () => { 
-    setVisible(false); 
+
+  const onCancel = () => {
+    setVisible(false);
   };
+
+
   return (
     <View>
       <Pressable onPress={onPressDate}>
-        {date?<Text style={TextStyle}>{format(new Date(date), 'PPP', {locale: ko})} </Text>:
-        <Text style={{...TextStyle, color:'lightgrey', fontSize:15}}>yyyy / mm / dd</Text>}
+      {date?<StyledView><StyledText>{format(new Date(date), 'PPP', {locale: ko})}</StyledText></StyledView>:
+        <StyledView><StyledText>yyyy / mm / dd</StyledText></StyledView>}
       </Pressable>
-      <DateTimePickerModal 
+      <DateTimePickerModal
         isVisible={visible}
-        mode={"date"}
+        mode="date"
         onConfirm={onConfirm}
         onCancel={onCancel}
         maximumDate={maxDate}
-         />
+      />
     </View>
   );
-}
-const TextStyle = StyleSheet.create({
-      marginHorizontal: 20,
-      marginVertical: 3,
-      height: 45,
-      paddingLeft: 10,
-      borderWidth:1,
-      borderColor: "lightgrey", 
-      lineHeight:45,
-  });
+};
+
 export default DatePickerModal;

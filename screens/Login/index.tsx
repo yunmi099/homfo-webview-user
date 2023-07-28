@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Text ,View, TextInput, Button } from 'react-native';
 import { Container, StyledTextInput, StyledButton, ButtonText} from './style';
-const Login = ({ navigation }) => {
+const Login = ({ navigation }: any) => {
   const [verify, setVerify]= useState(false);
   return (
     <Container>
