@@ -6,7 +6,7 @@ const Home = () => {
   return(
     <SafeAreaView style={{width:"100%", height:"100%"}}>
       <WebView
-      source={{uri: 'http://localhost:3000'}}
+      source={{uri: 'https://dev-webview.ajou-only-five.shop'}}
       javaScriptEnabled={true}
       useWebKit={true}
       />

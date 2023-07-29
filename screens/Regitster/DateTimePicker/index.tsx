@@ -20,7 +20,7 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
   useEffect(() => {
     setBirth((prevFormData) => ({
       ...prevFormData,
-      "dateOfBirth": formatISO(maxDate),
+      "dateOfBirth": formatISO(maxDate).substring(0,10),
     }));
   }, []);
 
@@ -32,7 +32,7 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
     setVisible(false);
     setBirth((prevFormData) => ({
       ...prevFormData,
-      "dateOfBirth": formatISO(selectedDate),
+      "dateOfBirth": formatISO(selectedDate).substring(0,10),
     }));
     onChangeDate(selectedDate);
   };

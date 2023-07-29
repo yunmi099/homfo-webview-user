@@ -1,6 +1,6 @@
 interface UserFormData {
 	userAccount: string;
-	userPassWord: string;
+	userPassword: string;
     nickName: string;
     userPhoneNum: string;
     gender: string;

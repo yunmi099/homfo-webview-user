@@ -7,31 +7,57 @@ import { SERVER_DEPOLY_URL } from '../../utils/axios';
 import axios, { AxiosResponse } from 'axios';
 import './interface'
 const Register = ({ navigation }: any) => {
-  const [verify, setVerify] = useState(false)
+  const [verify, setVerify] = useState<boolean>(false)
+  const [jobSetting, setJob] = useState<boolean>(false);
   const [formData, setFormData] = useState<UserFormData>({
     userAccount: "",
-    userPassWord: "",
+    userPassword: "",
     nickName: "",
     userPhoneNum: "",
     gender: "",
     job: "",
     dateOfBirth: ""
   });
-
+  const [detailJob, setDetailJob] = useState<string>("");
   const onChangeText = (name: string, value: string) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
     }));
   };
-
+  const jobHandleEvent = (value:string)=>{
+    if (value === '기타'){
+      setJob(true);
+    } else {
+      setJob(false);
+    }
+    onChangeText("job", value);
+  } 
   const registerUserInfo = async () => {
+  
     try {
-      console.log(formData);
-      const res: AxiosResponse = await axios.post(`${SERVER_DEPOLY_URL}/users/sign-up`, formData);
+      let data;
+      if (formData.job === "기타") {
+        data = {...formData,  job: detailJob}
+      } else{
+        data = {...formData}
+      } 
+      const res: AxiosResponse = await axios.post(`${SERVER_DEPOLY_URL}/users/sign-up`, data);
       console.log(res.data);
-    } catch (e) {
-      console.log(e);
+      navigation.navigate('Home')
+    } catch (error: any) {
+      if (error.response) {
+        // 서버로부터 응답이 도착한 경우
+        console.log('Response Data:', error.response.data);
+        console.log('Response Status:', error.response.status);
+        console.log('Response Headers:', error.response.headers);
+      } else if (error.request) {
+        // 서버로 요청이 전송되지 않은 경우
+        console.log('Request:', error.request);
+      } else {
+        // 오류가 발생한 경우
+        console.log('Error:', error.message);
+      }
     }
   };
 
@@ -73,8 +99,8 @@ const Register = ({ navigation }: any) => {
           <StyledText>비밀번호</StyledText>
           <StyledTextInput
             secureTextEntry={true}
-            value={formData.userPassWord}
-            onChangeText={(text: string) => onChangeText("userPassWord", text)}
+            value={formData.userPassword}
+            onChangeText={(text: string) => onChangeText("userPassword", text)}
             placeholder={"영문,숫자,특수기호를 포함하여 8~15자 이내로 작성해주세요"}
             maxLength={20}
             autoCorrect={false}
@@ -103,6 +129,8 @@ const Register = ({ navigation }: any) => {
             placeholder={{
               label: "성별",
             }}
+            textInputProps={{ underlineColorAndroid: 'transparent' }}
+            value={formData.gender}
             onValueChange={(value: string) => onChangeText("gender", value)}
             useNativeAndroidPickerStyle={false}
             fixAndroidTouchableBug={true}
@@ -126,7 +154,7 @@ const Register = ({ navigation }: any) => {
             }}
             fixAndroidTouchableBug={true}
             value={formData.job}
-            onValueChange={(value: string) => onChangeText("job", value)}
+            onValueChange={(value: string) => jobHandleEvent(value)}
             useNativeAndroidPickerStyle={false}
             items={[
               { label: '대학생', value: '대학생' },
@@ -135,9 +163,12 @@ const Register = ({ navigation }: any) => {
             ]}
             style={pickerSelectStyles}
           />
-          {formData.job === "기타" ? <StyledTextInput placeholder={"20자 이내로 작성해주세요"} autoCorrect={false} maxLength={20} autoCapitalize={"none"} /> : null}
+          {jobSetting? <StyledTextInput placeholder={"20자 이내로 작성해주세요"} 
+                value={detailJob}
+                onChangeText={(text: string) => setDetailJob(text)}
+                autoCorrect={false} maxLength={20} autoCapitalize={"none"} /> : null}
         </Block>
-        <StyledButton onPress={() => { registerUserInfo(); navigation.navigate('Home'); }}>
+        <StyledButton onPress={() => registerUserInfo()}>
           <Buttontext>가입하기</Buttontext>
         </StyledButton>
       </Container>
