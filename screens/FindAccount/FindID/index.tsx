@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text} from "react-native"
 import { Container, StyledText } from "../style";
-const FindID = ({ navigation }: any) => {
+import Header from "../../../components/layout/header";
+const FindID = () => {
     return(
     <Container>
-        <StyledText>Hom fo</StyledText>
+        <Header title={"아이디 찾기"}/>
     </Container>
 );
 }

@@ -6,6 +6,7 @@ import DatePickerModal from './DateTimePicker';
 import { fetchFromApi } from '../../utils/axios';
 import { AxiosResponse } from 'axios';
 import './interface'
+import Header from '../../components/layout/header';
 const Register = ({ navigation }: any) => {
   const [verify, setVerify] = useState<boolean>(false)
   const [jobSetting, setJob] = useState<boolean>(false);
@@ -64,6 +65,7 @@ const Register = ({ navigation }: any) => {
   return (
     <ScrollView>
       <Container>
+        <Header title={"회원가입"}/>
         <Block>
           <StyledText>전화번호</StyledText>
         </Block>

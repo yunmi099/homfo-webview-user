@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Text} from "react-native"
 import { Container, StyledText } from "../style";
-const FindPassword = ({ navigation }: any) => {
+import Header from "../../../components/layout/header";
+const FindPassword = () => {
     return(
     <Container>
-        <StyledText>Hom fo</StyledText>
+        <Header title={"비밀번호 찾기"}/>
     </Container>
 );
 }
