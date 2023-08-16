@@ -3,8 +3,8 @@ import { View, StyleSheet, ScrollView } from 'react-native';
 import { Container, StyledText, Block, StyledTextInput, StyledButton, NumberTextInput, StyledVerifybutton, Buttontext } from './style';
 import RNPickerSelect from 'react-native-picker-select';
 import DatePickerModal from './DateTimePicker';
-import { SERVER_DEPOLY_URL } from '../../utils/axios';
-import axios, { AxiosResponse } from 'axios';
+import { fetchFromApi } from '../../utils/axios';
+import { AxiosResponse } from 'axios';
 import './interface'
 const Register = ({ navigation }: any) => {
   const [verify, setVerify] = useState<boolean>(false)
@@ -42,7 +42,7 @@ const Register = ({ navigation }: any) => {
       } else{
         data = {...formData}
       } 
-      const res: AxiosResponse = await axios.post(`${SERVER_DEPOLY_URL}/users/sign-up`, data);
+      const res: AxiosResponse = await fetchFromApi('POST',`/users/sign-up`, data);
       console.log(res.data);
       navigation.navigate('Home')
     } catch (error: any) {
@@ -157,9 +157,12 @@ const Register = ({ navigation }: any) => {
             onValueChange={(value: string) => jobHandleEvent(value)}
             useNativeAndroidPickerStyle={false}
             items={[
-              { label: '대학생', value: '대학생' },
-              { label: '직장인', value: '직장인' },
-              { label: '기타', value: '기타' },
+              { label: '학생', value: '학생'},
+              { label: '직장인', value: '직장인'},
+              { label: '자영업자', value: '자영업자'},
+              { label: '프리랜서', value: '프리랜서'},
+              { label: '주부', value: '주부'},
+              { label: '기타', value: '기타'},
             ]}
             style={pickerSelectStyles}
           />

@@ -14,7 +14,16 @@ const App = () => {
       <Stack.Navigator>
         <Stack.Screen name="Splash" component={Splash} options={{headerShown:false}}/>
         <Stack.Screen name="Home" component={Home} options={{headerShown:false}}/>
-        <Stack.Screen name="로그인" component={Login} options={{headerShown:false}}/>
+        <Stack.Screen
+          name="로그인"
+          component={Login}
+          options={{
+            title: '',
+            headerBackTitleVisible: false,
+            headerTintColor:'black',
+            headerShadowVisible: false 
+          }}
+        />
         <Stack.Screen name="회원가입" component={Register}/>
       </Stack.Navigator>
     </NavigationContainer>

@@ -1,37 +1,43 @@
 import styled from 'styled-components/native';
 import { TouchableOpacityProps, TextProps } from 'react-native';
-interface StyledButtonProps extends TouchableOpacityProps {
-  set: boolean;
-}
-interface StyledButtonTextProps extends TextProps {
-  set: boolean;
-}
+
 export const StyledTextInput = styled.TextInput`
+  border-radius: 11px;
   border: 1px solid;
   border-color: lightgrey;
-  width: 55%;
+  width: 85%;
   padding: 20px;
-  height: 50px;
+  height: 5.7%;
   margin-top: 8px;
-  margin-right: 3px;
+  margin-horizontal: 7.5%;
 `;
-export const StyledButton = styled.TouchableOpacity<StyledButtonProps>`
-  background-color: ${props => (props.set ? 'white' : '#8b00ff')};
-  border: 1px solid;
-  border-color: lightgrey;
-  align-items: center;
-  justify-content: center;
-  width: 35%;
-  height: 50px;
+export const TextView = styled.Text`
+  margin-vertical: 15%;
+  margin-left: 7.5%;
+`
+export const StyledText = styled.Text`
+  font-weight: 600;
+  font-size: 25;
+
+`
+export const LoginButton = styled.TouchableOpacity`
+  width: 85%;
+  height: 5.7%;
   margin-top: 8px;
-  margin-left: 3px;
-`;
-export const ButtonText = styled.Text<StyledButtonTextProps>`
-  color: ${props => (props.set ? 'lightgrey' : 'white')};
-`;
+  margin-horizontal: 7.5%;
+`
 export const Container = styled.SafeAreaView`
   width: 100%;
   height: 100%;
   background-color: white;
-  align-items: center;
 `;
+export const VerticalLine = styled.View`
+  width:1px;
+  height: 12px;
+  background-color: #D2D2D2;
+  margin-horizontal:10px;
+`
+export const TextButton = styled.Text`
+  font-weight: 600;
+  font-size: 13;
+`
