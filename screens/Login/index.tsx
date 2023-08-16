@@ -20,18 +20,18 @@ const Login = ({ navigation }: any) => {
               colors={['#3C02FF', '#842CFF']}
               start={{ x: 0, y: 0 }}
               end={{ x: 0, y: 1 }}
-              style={{width:"100%", height: "100%", alignItems:'center', justifyContent:'center', borderRadius:11}}
+              style={{width:"100%", height: "100%", alignItems:'center', justifyContent:'center', borderRadius:7}}
             >
 
             <Text style={{fontSize:15, color:'white', fontWeight:"500"}}>로그인</Text>
            </LinearGradient>
           </LoginButton>
         <View style={{marginTop:20,flexDirection:'row', width:"100%", justifyContent:"center", alignItems:'center'}}>
-          <TouchableOpacity><TextButton>아이디 찾기</TextButton></TouchableOpacity>
+          <TouchableOpacity  onPress={()=>navigation.navigate('아이디찾기')}><TextButton>아이디 찾기</TextButton></TouchableOpacity>
           <VerticalLine></VerticalLine>
-          <TouchableOpacity><TextButton>비밀번호 찾기</TextButton></TouchableOpacity>
+          <TouchableOpacity  onPress={()=>navigation.navigate('비밀번호찾기')}><TextButton>비밀번호 찾기</TextButton></TouchableOpacity>
           <VerticalLine></VerticalLine>
-          <TouchableOpacity><TextButton>회원가입</TextButton></TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('회원가입')}><TextButton>회원가입</TextButton></TouchableOpacity>
         </View>
     </Container>
     );

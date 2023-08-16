@@ -5,8 +5,8 @@ import Login from './screens/Login';
 import Register from './screens/Regitster';
 import Splash from './screens/Splash';
 import Home from './screens/Home';
-
-
+import FindID from './screens/FindAccount/FindID';
+import FindPassword from './screens/FindAccount/FindPassword';
 const Stack = createStackNavigator();
 const App = () => {
   return (
@@ -24,7 +24,35 @@ const App = () => {
             headerShadowVisible: false 
           }}
         />
-        <Stack.Screen name="회원가입" component={Register}/>
+          <Stack.Screen
+          name="아이디찾기"
+          component={FindID}
+          options={{
+            title: '',
+            headerBackTitleVisible: false,
+            headerTintColor:'black',
+            headerShadowVisible: false 
+          }}
+        />
+         <Stack.Screen
+          name="비밀번호찾기"
+          component={FindPassword}
+          options={{
+            title: '',
+            headerBackTitleVisible: false,
+            headerTintColor:'black',
+            headerShadowVisible: false 
+          }}
+        />
+        <Stack.Screen 
+          name="회원가입" 
+          component={Register}
+          options={{
+            title: '',
+            headerBackTitleVisible: false,
+            headerTintColor:'black',
+            headerShadowVisible: false 
+                  }}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

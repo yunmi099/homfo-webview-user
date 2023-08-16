@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 import { TouchableOpacityProps, TextProps } from 'react-native';
 
 export const StyledTextInput = styled.TextInput`
-  border-radius: 11px;
+  border-radius: 7px;
   border: 1px solid;
   border-color: lightgrey;
   width: 85%;
