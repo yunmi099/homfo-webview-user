@@ -23,7 +23,7 @@ const Login = ({ navigation }: any) => {
               style={{width:"100%", height: "100%", alignItems:'center', justifyContent:'center', borderRadius:7}}
             >
 
-            <Text style={{fontSize:15, color:'white', fontWeight:"500"}}>로그인</Text>
+            <Text style={{fontSize:15, color:'white', fontWeight:"700"}}>로그인</Text>
            </LinearGradient>
           </LoginButton>
         <View style={{marginTop:20,flexDirection:'row', width:"100%", justifyContent:"center", alignItems:'center'}}>
