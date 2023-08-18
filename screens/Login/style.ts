@@ -17,7 +17,7 @@ export const TextView = styled.Text`
 `
 export const StyledText = styled.Text`
   font-weight: 600;
-  font-size: 25;
+  font-size: 25px;
 
 `
 export const LoginButton = styled.TouchableOpacity`
@@ -39,5 +39,5 @@ export const VerticalLine = styled.View`
 `
 export const TextButton = styled.Text`
   font-weight: 600;
-  font-size: 13;
+  font-size: 13px;
 `
