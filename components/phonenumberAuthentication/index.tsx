@@ -19,6 +19,8 @@ const PhoneAuth = () => {
     })
     const {currentAuth, verifyAuth} = confirm;
     const [count, setCount] =useState(0);
+    const [open,setOpen] = useState(false)
+    const [errorMessage, setErrormessage] =  useState({"mention":"","color":""})
     const onChangeCurrentValue = (key:string, value:string)=>{
         setPhonenumber((prev)=>({...phonenumber,[key]:value}));
     }
@@ -31,11 +33,12 @@ const PhoneAuth = () => {
             const res = await fetchFromApi('POST', `/users/sms-auth`,data);
             if (res.status === 200) {
                 setCount(count+1);
+                setOpen(true);
                 resetTimer();
                 startTimer();                
             }
         } catch (e:any) {
-            Alert.alert(e.response.data.message)
+            Alert.alert(e.response.data.message);
         }
         
     };
@@ -75,10 +78,10 @@ const PhoneAuth = () => {
             const res = await fetchFromApi('POST', `/users/sms-auth/verify`,data);
             if (res.status === 200) {
                 resetTimer();
-                Alert.alert("인증확인되었습니다.")
+                setErrormessage({"mention":"인증확인이 완료 되었습니다.","color":"#39A03E"})
             }
         } catch (e:any) {
-            Alert.alert(e.response.data.message);
+            setErrormessage({"mention":e.response.data.message,"color":"#FF6666"})
         }
         
     };
@@ -104,19 +107,20 @@ const PhoneAuth = () => {
             <Text style={{marginBottom:'3%', fontSize:17.5}}>전화번호</Text>
             <LineContainer>
                 <NumberInput  placeholder="000-0000-0000" value={currentNumber} onChangeText={(text:string)=>onChangeCurrentValue("currentNumber",text)}></NumberInput>
-                {isRunning&&<Timer><Text style={{color:'red'}}>{formatTime(remainingTime)}</Text></Timer>}
+                {isRunning&&<Timer><Text style={{color:'#FF6666'}}>{formatTime(remainingTime)}</Text></Timer>}
                 {currentAuth?
             <TouchableOpacity onPress={()=>{handleRequest();}}><AuthButton title="인증요청"/></TouchableOpacity>
              :<TouchableOpacity onPress={()=>Alert.alert("000-0000-0000형식으로 입력해주세요")}><NoneActiveButton title="인증요청"/></TouchableOpacity>}
             </LineContainer>
             <HorizontalLine></HorizontalLine>
-            {isRunning?
+            {open?
             <LineContainer>
                 <NumberInput  keyboardType="numeric"  placeholder="인증번호를 입력해주세요"  value={verifyNumber} onChangeText={(text:string)=>onChangeCurrentValue("verifyNumber",text)}></NumberInput>
                 {verifyAuth?<TouchableOpacity onPress={()=>authenticationVerify()}><AuthButton title="인증확인"/></TouchableOpacity>
                 :<View><NoneActiveButton title="인증확인"/></View>}
             </LineContainer>:null}
             <HorizontalLine></HorizontalLine>
+            <Text style={{color: errorMessage.color, fontSize:12, fontWeight:"400"}}>{errorMessage.mention}</Text>
         </BoxContainer>
 );
 }
