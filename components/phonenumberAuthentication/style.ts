@@ -2,7 +2,7 @@ import styled from 'styled-components/native';
 
 export const BoxContainer = styled.View`
     margin-top: 15%;
-    margin-left:7.5%;
+    margin-left:8%;
     width:100%;
     height:100%;
 `;
@@ -20,7 +20,13 @@ export const HorizontalLine = styled.View`
     
 `;
 export const NumberInput = styled.TextInput`
-    width: 61%;
+    position:relative;
+    width: 62.34%;
     font-size:13px;
 `;
 
+export const Timer = styled.View`
+    position:absolute;
+    top:20%;
+    right:41%;
+`

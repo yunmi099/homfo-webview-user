@@ -3,6 +3,7 @@ import { View, Text} from "react-native"
 import { Container, NotifyText } from "../style";
 import Header from "../../../components/layout/header";
 import PhoneAuth from "../../../components/phonenumberAuthentication";
+import NoneActiveButton from "../../../components/phonenumberAuthentication/NoneActiveButton";
 const FindID = () => {
     return(
     <Container>
