@@ -6,7 +6,12 @@ import AuthButton from "./AuthButton";
 import NoneActiveButton from "./NoneActiveButton";
 import { fetchFromApi } from "../../utils/axios";
 import { useDebounce } from "../../hooks/useDebounce";
-const PhoneAuth = () => {
+interface PhoneAuthProps {
+    verifyComplete: boolean;
+    setVerifyComplete: React.Dispatch<React.SetStateAction<boolean>>;
+  }
+
+  const PhoneAuth: React.FC<PhoneAuthProps> = (props: PhoneAuthProps) =>{
     const { isRunning, remainingTime, startTimer, resetTimer} = useTimerStore();
     const [phonenumber, setPhonenumber]=useState({
         "currentNumber": "",
@@ -31,7 +36,7 @@ const PhoneAuth = () => {
         let data = {'userPhoneNum': currentNumber}
         try {
             const res = await fetchFromApi('POST', `/users/sms-auth`,data);
-            if (res.status === 200) {
+            if (res.status === 200) { 
                 setCount(count+1);
                 setOpen(true);
                 resetTimer();
@@ -78,6 +83,7 @@ const PhoneAuth = () => {
             const res = await fetchFromApi('POST', `/users/sms-auth/verify`,data);
             if (res.status === 200) {
                 resetTimer();
+                props.setVerifyComplete(true);
                 setErrormessage({"mention":"인증확인이 완료 되었습니다.","color":"#39A03E"})
             }
         } catch (e:any) {
