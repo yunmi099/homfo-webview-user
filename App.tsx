@@ -7,6 +7,8 @@ import Splash from './screens/Splash';
 import Home from './screens/Home';
 import FindID from './screens/FindAccount/FindID';
 import FindPassword from './screens/FindAccount/FindPassword';
+import ResultId from './screens/FindAccount/FindID/result';
+import ResultPassword from './screens/FindAccount/FindPassword/result';
 const Stack = createStackNavigator();
 const App = () => {
   return (
@@ -33,10 +35,30 @@ const App = () => {
             headerTintColor:'black',
             headerShadowVisible: false 
           }}
-        />
+        />          
+        <Stack.Screen
+        name="아이디찾기결과"
+        component={ResultId}
+        options={{
+          title: '',
+          headerBackTitleVisible: false,
+          headerTintColor:'black',
+          headerShadowVisible: false 
+        }}
+      />
          <Stack.Screen
           name="비밀번호찾기"
           component={FindPassword}
+          options={{
+            title: '',
+            headerBackTitleVisible: false,
+            headerTintColor:'black',
+            headerShadowVisible: false 
+          }}
+        />
+        <Stack.Screen
+          name="비밀번호찾기결과"
+          component={ResultPassword}
           options={{
             title: '',
             headerBackTitleVisible: false,

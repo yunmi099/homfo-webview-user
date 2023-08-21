@@ -1,11 +1,12 @@
 import React,{useState, useEffect} from "react";
 import { View, Text, TouchableOpacity, Alert} from "react-native"
 import {BoxContainer, HorizontalLine, LineContainer,NumberInput, Timer} from "./style";
-import useTimerStore from "../../hooks/useTimerStore";
+import useTimerStore from "../../store/context/useTimerStore";
 import AuthButton from "./AuthButton";
 import NoneActiveButton from "./NoneActiveButton";
 import { fetchFromApi } from "../../utils/axios";
 import { useDebounce } from "../../hooks/useDebounce";
+import usePhoneNumberStore from "../../store/context/useNumberStore";
 interface PhoneAuthProps {
     verifyComplete: boolean;
     setVerifyComplete: React.Dispatch<React.SetStateAction<boolean>>;
@@ -13,35 +14,27 @@ interface PhoneAuthProps {
 
   const PhoneAuth: React.FC<PhoneAuthProps> = (props: PhoneAuthProps) =>{
     const { isRunning, remainingTime, startTimer, resetTimer} = useTimerStore();
-    const [phonenumber, setPhonenumber]=useState({
-        "currentNumber": "",
-        "verifyNumber":"",
-    })
-    const {currentNumber, verifyNumber}=phonenumber;
+    const {phonenumber, setPhonenumber} = usePhoneNumberStore();
+    const [verifyNumber, setVerifynumber]=useState("")
     const [confirm, setConfirm] = useState({
         "currentAuth":false,
         "verifyAuth":false,
     })
     const {currentAuth, verifyAuth} = confirm;
     const [count, setCount] =useState(0);
-    const [open,setOpen] = useState(false)
     const [errorMessage, setErrormessage] =  useState({"mention":"","color":""})
-    const onChangeCurrentValue = (key:string, value:string)=>{
-        setPhonenumber((prev)=>({...phonenumber,[key]:value}));
-    }
     const onChangeAuth = (key:string, value:boolean)=>{
         setConfirm((prev)=>({...confirm,[key]:value}));
     }
     const authenticationRequest = async (): Promise<void> => {
-        let data = {'userPhoneNum': currentNumber}
+        let data = {'userPhoneNum': phonenumber}
         try {
-            const res = await fetchFromApi('POST', `/users/sms-auth`,data);
-            if (res.status === 200) { 
+            // const res = await fetchFromApi('POST', `/users/sms-auth`,data);
+            // if (res.status === 200) { 
                 setCount(count+1);
-                setOpen(true);
                 resetTimer();
                 startTimer();                
-            }
+            // }
         } catch (e:any) {
             Alert.alert(e.response.data.message);
         }
@@ -76,25 +69,25 @@ interface PhoneAuthProps {
         }
     const authenticationVerify = async (): Promise<void> => {
         let data = {
-            "userPhoneNum":currentNumber,
+            "userPhoneNum":phonenumber,
             "authNumber": verifyNumber,
           }
         try {
-            const res = await fetchFromApi('POST', `/users/sms-auth/verify`,data);
-            if (res.status === 200) {
+            // const res = await fetchFromApi('POST', `/users/sms-auth/verify`,data);
+            // if (res.status === 200) {
                 resetTimer();
                 props.setVerifyComplete(true);
                 setErrormessage({"mention":"인증확인이 완료 되었습니다.","color":"#39A03E"})
-            }
+            // }
         } catch (e:any) {
             setErrormessage({"mention":e.response.data.message,"color":"#FF6666"})
         }
         
     };
-    const debouncedNumber = useDebounce(currentNumber,500);
+    const debouncedNumber = useDebounce(phonenumber,500);
     const regax =  /^\d{3}-\d{4}-\d{4}$/;
     useEffect(()=>{
-        if (regax.test(currentNumber)){
+        if (regax.test(phonenumber)){
             onChangeAuth("currentAuth",true);
         } else{
             onChangeAuth("currentAuth",false);
@@ -112,16 +105,16 @@ interface PhoneAuthProps {
         <BoxContainer>
             <Text style={{marginBottom:'3%', fontSize:17.5}}>전화번호</Text>
             <LineContainer>
-                <NumberInput  placeholder="000-0000-0000" value={currentNumber} onChangeText={(text:string)=>onChangeCurrentValue("currentNumber",text)}></NumberInput>
+                <NumberInput  placeholder="000-0000-0000" value={phonenumber} onChangeText={(text:string)=>setPhonenumber(text)}></NumberInput>
                 {isRunning&&<Timer><Text style={{color:'#FF6666'}}>{formatTime(remainingTime)}</Text></Timer>}
                 {currentAuth?
-            <TouchableOpacity onPress={()=>{handleRequest();}}><AuthButton title="인증요청"/></TouchableOpacity>
+            <TouchableOpacity onPress={()=>handleRequest()}><AuthButton title="인증요청"/></TouchableOpacity>
              :<TouchableOpacity onPress={()=>Alert.alert("000-0000-0000형식으로 입력해주세요")}><NoneActiveButton title="인증요청"/></TouchableOpacity>}
             </LineContainer>
             <HorizontalLine></HorizontalLine>
-            {open?
+            {isRunning?
             <LineContainer>
-                <NumberInput  keyboardType="numeric"  placeholder="인증번호를 입력해주세요"  value={verifyNumber} onChangeText={(text:string)=>onChangeCurrentValue("verifyNumber",text)}></NumberInput>
+                <NumberInput  keyboardType="numeric"  placeholder="인증번호를 입력해주세요"  value={verifyNumber} onChangeText={(text:string)=>setVerifynumber(text)}></NumberInput>
                 {verifyAuth?<TouchableOpacity onPress={()=>authenticationVerify()}><AuthButton title="인증확인"/></TouchableOpacity>
                 :<View><NoneActiveButton title="인증확인"/></View>}
             </LineContainer>:null}

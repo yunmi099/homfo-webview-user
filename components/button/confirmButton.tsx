@@ -2,11 +2,13 @@ import React from "react";
 import { StyledView ,StyledText} from "./style";
 interface HeaderProps {
   title?: string;
+  navigation:any;
+  location: string;
 }
 
-const ConfirmButton = ({ title }: HeaderProps) => {
+const ConfirmButton = ({ title, navigation, location }: HeaderProps) => {
   return (
-   <StyledView><StyledText>{title}</StyledText></StyledView>
+   <StyledView onPress={()=>navigation.navigate(location)}><StyledText>{title}</StyledText></StyledView>
   );
 };
 

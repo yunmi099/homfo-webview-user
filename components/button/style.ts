@@ -1,5 +1,5 @@
 import styled from 'styled-components/native';
-export const StyledView = styled.View`
+export const StyledView = styled.TouchableOpacity`
 position: absolute;
 bottom: 0;
 width:100%;
