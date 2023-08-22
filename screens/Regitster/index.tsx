@@ -7,9 +7,12 @@ import { fetchFromApi } from '../../utils/axios';
 import { AxiosResponse } from 'axios';
 import './interface'
 import Header from '../../components/layout/header';
+import PhoneAuth from '../../components/phonenumberAuthentication';
+import ConfirmButton from '../../components/button/confirmButton';
 const Register = ({ navigation }: any) => {
-  const [verify, setVerify] = useState<boolean>(false)
   const [jobSetting, setJob] = useState<boolean>(false);
+  const [step, setStep] = useState<number>(0);
+  const [verifyComplete, setVerifyComplete]=useState(false);
   const [formData, setFormData] = useState<UserFormData>({
     userAccount: "",
     userPassword: "",
@@ -35,7 +38,6 @@ const Register = ({ navigation }: any) => {
     onChangeText("job", value);
   } 
   const registerUserInfo = async () => {
-  
     try {
       let data;
       if (formData.job === "기타") {
@@ -65,6 +67,8 @@ const Register = ({ navigation }: any) => {
   return (
       <Container>
         <Header title={"회원가입"}/>
+        {step===0&&
+        <>
           <StyledText>닉네임</StyledText>
           <StyledTextInput
             value={formData.nickName}
@@ -100,9 +104,59 @@ const Register = ({ navigation }: any) => {
             autoCorrect={false}
             autoCapitalize={"none"}
           />
-        <StyledButton onPress={() => registerUserInfo()}>
-          <Buttontext>가입하기</Buttontext>
-        </StyledButton>
+        </>}
+        {step===1&&
+        <>
+          <StyledText>성별</StyledText>
+          <RNPickerSelect
+            placeholder={{
+              label: "성별",
+            }}
+            textInputProps={{ underlineColorAndroid: 'transparent' }}
+            value={formData.gender}
+            onValueChange={(value: string) => onChangeText("gender", value)}
+            useNativeAndroidPickerStyle={false}
+            fixAndroidTouchableBug={true}
+            items={[
+              { label: '남성', value: 'M' },
+              { label: '여성', value: 'W' },
+            ]}
+            style={pickerSelectStyles}
+          />
+          <StyledText>생년월일</StyledText>
+          <DatePickerModal setBirth={setFormData} />
+          <StyledText>직업</StyledText>
+          <RNPickerSelect
+            textInputProps={{ underlineColorAndroid: 'transparent' }}
+            placeholder={{
+              label: "직업",
+            }}
+            fixAndroidTouchableBug={true}
+            value={formData.job}
+            onValueChange={(value: string) => jobHandleEvent(value)}
+            useNativeAndroidPickerStyle={false}
+            items={[
+              { label: '학생', value: '학생'},
+              { label: '직장인', value: '직장인'},
+              { label: '자영업자', value: '자영업자'},
+              { label: '프리랜서', value: '프리랜서'},
+              { label: '주부', value: '주부'},
+              { label: '기타', value: '기타'},
+            ]}
+            style={pickerSelectStyles}
+          />
+          {jobSetting? <StyledTextInput placeholder={"20자 이내로 작성해주세요"} 
+                value={detailJob}
+                onChangeText={(text: string) => setDetailJob(text)}
+                autoCorrect={false} maxLength={20} autoCapitalize={"none"} /> : null
+          }
+        </>}
+          {
+            step===2&&<PhoneAuth verifyComplete={verifyComplete} setVerifyComplete={setVerifyComplete}/>
+          }
+          {
+            step===2?<ConfirmButton title="로그인" navigation={navigation} location='로그인'/>:<ConfirmButton title="확인" onPress={()=>setStep(step+1)}/>
+          }
       </Container>
   );
 };

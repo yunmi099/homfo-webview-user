@@ -4,15 +4,15 @@ import {BoxContainer, HorizontalLine, LineContainer,NumberInput, Timer} from "./
 import useTimerStore from "../../store/context/useTimerStore";
 import AuthButton from "./AuthButton";
 import NoneActiveButton from "./NoneActiveButton";
-import { fetchFromApi } from "../../utils/axios";
-import { useDebounce } from "../../hooks/useDebounce";
 import usePhoneNumberStore from "../../store/context/useNumberStore";
+import { useIsFocused } from "@react-navigation/native";
 interface PhoneAuthProps {
     verifyComplete: boolean;
     setVerifyComplete: React.Dispatch<React.SetStateAction<boolean>>;
   }
 
   const PhoneAuth: React.FC<PhoneAuthProps> = (props: PhoneAuthProps) =>{
+    const isFocused = useIsFocused();
     const { isRunning, remainingTime, startTimer, resetTimer} = useTimerStore();
     const {phonenumber, setPhonenumber} = usePhoneNumberStore();
     const [verifyNumber, setVerifynumber]=useState("")
@@ -84,16 +84,15 @@ interface PhoneAuthProps {
         }
         
     };
-    const debouncedNumber = useDebounce(phonenumber,500);
-    const regax =  /^\d{3}-\d{4}-\d{4}$/;
+
     useEffect(()=>{
+    const regax =  /^\d{3}-\d{4}-\d{4}$/;
         if (regax.test(phonenumber)){
             onChangeAuth("currentAuth",true);
         } else{
             onChangeAuth("currentAuth",false);
         }
-
-    },[debouncedNumber])
+    },[phonenumber])
     useEffect(()=>{
         if (verifyNumber.length===4){
             onChangeAuth("verifyAuth", true);}
