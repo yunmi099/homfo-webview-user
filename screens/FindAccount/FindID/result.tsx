@@ -5,6 +5,7 @@ import { fetchFromApi } from "../../../utils/axios";
 import usePhoneNumberStore from "../../../store/context/useNumberStore";
 import ConfirmButton from "../../../components/button/confirmButton";
 import { formatDateToCustomFormat } from "../../../utils/dateFormat";
+import { ActivityIndicator } from "react-native";
 interface AccountInfo{
     userAccount:string;
     createdAt:string;
@@ -20,6 +21,7 @@ const ResultId = ({navigation}:any) => {
             setUserAccount(res.data);
             console.log(res.data);
         } catch (e:any) {
+            setUserAccount({userAccount: "", createdAt:""})
             setError(e.response.data.message);
         }
         
@@ -29,13 +31,13 @@ const ResultId = ({navigation}:any) => {
     <Container>
         <Header title={"아이디 찾기"}/>
         <NotifyText>전화번호 정보와 일치하는{"\n"}아이디를 찾은 결과 입니다.</NotifyText>
-        {userAccount!==undefined&&<FoundIdBox>{error.length===0?
+        <FoundIdBox>{userAccount!==undefined?(error.length===0?
             <>
             <FoundIdText>아이디: {userAccount.userAccount}</FoundIdText>
             <FoundIdText>가입일: {formatDateToCustomFormat(userAccount.createdAt)}</FoundIdText>
             </>
-            :<FoundIdText>{error}</FoundIdText>}
-        </FoundIdBox>}
+            :<FoundIdText>{error}</FoundIdText>)
+        :<ActivityIndicator/>}</FoundIdBox>
         <ConfirmButton
          title={error.length === 0 ? "로그인 하기" : "회원가입 하기"}
          location={error.length === 0 ? "로그인" : "회원가입"}

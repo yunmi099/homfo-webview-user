@@ -20,10 +20,7 @@ const App = () => {
           name="로그인"
           component={Login}
           options={{
-            title: '',
-            headerBackTitleVisible: false,
-            headerTintColor:'black',
-            headerShadowVisible: false 
+            headerShown: false,
           }}
         />
           <Stack.Screen

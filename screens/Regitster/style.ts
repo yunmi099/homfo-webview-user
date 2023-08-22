@@ -47,8 +47,8 @@ export const StyledTextInput = styled.TextInput`
 
 export const Container = styled.View`
   width: 100%;
-  align-items: center;
-  background-color: white;
+  height: 100%;
+  background-color:white;
 `;
 export const StyledButton = styled.TouchableOpacity`
   background-color: #8b00ff;
