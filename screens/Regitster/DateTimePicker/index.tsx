@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Pressable, View } from "react-native";
 import { format, formatISO } from "date-fns";
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { StyledView, StyledText } from "./style";
+import { StyledText } from "./style";
 import '../interface';
 import { ko } from "date-fns/locale";
 
@@ -43,10 +43,10 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
 
 
   return (
-    <View>
+    <View style={{marginLeft:"6.8%"}}>
       <Pressable onPress={onPressDate}>
-      {date?<StyledView><StyledText>{format(new Date(date), 'PPP', {locale: ko})}</StyledText></StyledView>:
-        <StyledView><StyledText>yyyy / mm / dd</StyledText></StyledView>}
+      {date?<StyledText>생년월일을 선택해주세요.</StyledText>:
+        <StyledText>yyyy / mm / dd</StyledText>}
       </Pressable>
       <DateTimePickerModal
         isVisible={visible}

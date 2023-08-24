@@ -7,11 +7,12 @@ interface StyledButtonTextProps extends TextProps {
   set?: boolean;
 }
 export const StyledText = styled.Text`
-  margin: 15px;
-  font-size: 15px;
+  margin-horizontal: 6.8%;
+  margin-vertical: 5%;
+  font-size: 18px;
 `;
 export const Block = styled.View`
-  width: 100%;
+  margin-vertical:10%;
 `;
 export const NumberTextInput = styled.TextInput`
   border: 1px solid;
@@ -37,12 +38,8 @@ export const StyledVerifybutton = styled.TouchableOpacity<StyledButtonProps>`
   margin-left: 3px;
 `;
 export const StyledTextInput = styled.TextInput`
-  margin-horizontal: 20px;
-  margin-vertical: 3px;
-  border: 1px solid;
-  height: 45px;
-  padding-left: 10px;
-  border-color: lightgrey;
+  margin-horizontal: 6.8%;
+  height: 30px;
 `;
 
 export const Container = styled.View`
@@ -65,3 +62,20 @@ export const StyledButton = styled.TouchableOpacity`
 export const ButtonText = styled.Text`
   color: white;
 `;
+export const HorizontalLine = styled.View`
+    width: 86.4%;
+    margin-left:6.8%;
+    height:1px;
+    background-color: #D1D1D1;
+    
+`;
+interface CommentTextProps {
+  color: string; // Add a color prop
+}
+export const CommentText = styled.Text<CommentTextProps>`
+  color: ${(props) => props.color};
+  margin-left:6.8%;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  font-size: 11px;
+`

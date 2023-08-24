@@ -6,6 +6,7 @@ import AuthButton from "./AuthButton";
 import NoneActiveButton from "./NoneActiveButton";
 import usePhoneNumberStore from "../../store/context/useNumberStore";
 import { useIsFocused } from "@react-navigation/native";
+
 interface PhoneAuthProps {
     verifyComplete: boolean;
     setVerifyComplete: React.Dispatch<React.SetStateAction<boolean>>;
@@ -84,7 +85,9 @@ interface PhoneAuthProps {
         }
         
     };
-
+    useEffect(()=>{
+        setPhonenumber("");
+    },[])
     useEffect(()=>{
     const regax =  /^\d{3}-\d{4}-\d{4}$/;
         if (regax.test(phonenumber)){
