@@ -4,6 +4,7 @@ import { Container, NotifyText } from "../style";
 import Header from "../../../components/layout/header";
 import PhoneAuth from "../../../components/phonenumberAuthentication";
 import ConfirmButton from "../../../components/button/confirmButton";
+
 const FindID = ({navigation}:any) => {
     const [verifyComplete, setVerifyComplete] = useState(false);
     return(

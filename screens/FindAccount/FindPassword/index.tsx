@@ -1,4 +1,4 @@
-import React,{useState} from "react";
+import React,{useState} from "react"
 import { Container, NotifyText } from "../style";
 import Header from "../../../components/layout/header";
 import PhoneAuth from "../../../components/phonenumberAuthentication";

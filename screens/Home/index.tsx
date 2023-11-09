@@ -4,9 +4,10 @@ import { SafeAreaView } from 'react-native';
 const Home = () => {
   const ref = useRef<WebView>(null);
   return(
-    <SafeAreaView style={{width:"100%", height:"100%"}}>
+    <SafeAreaView style={{width:"100%", height:"100%",backgroundColor:'white'}}>
       <WebView
-      source={{uri: 'https://dev-webview.ajou-only-five.shop'}}
+      // source={{uri: 'https://dev-webview.ajou-only-five.shop'}}
+      source={{uri: 'http://localhost:3000'}}
       javaScriptEnabled={true}
       useWebKit={true}
       />

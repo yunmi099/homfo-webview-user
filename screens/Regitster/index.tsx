@@ -83,7 +83,7 @@ const Register = ({ navigation }: any) => {
   const debouncedNickname = useDebounce(formData.nickName, 500);
   useEffect(() => {
    if(debouncedNickname.length===0){
-       setMessage(prev=>({...prev,"nickname":"영문(대소문자가능),숫자,한글 가능 8~15글자\n닉네임을 입력해주세요."}));
+       setMessage(prev=>({...prev,"nickname":"영문(대소문자가능),숫자,한글 가능 15글자 이내의\n닉네임을 입력해주세요."}));
        setColor(prev=>({...prev,"nickname":"#D1D1D1"}));
    } else if (debouncedNickname.length<=15){
      if (nickNameRegex.test(formData.nickName)){
@@ -95,7 +95,7 @@ const Register = ({ navigation }: any) => {
    }
   }, [debouncedNickname]);
   const idRegex =  /^[a-zA-Z0-9]{8,15}$/
-  const debouncedID = useDebounce(formData.userAccount, 500);
+  // const debouncedID = useDebounce(formData.userAccount, 500);
   // useEffect(() => {
   //  if(debouncedID.length===0){
   //      setMessage("영문(대소문자가능),숫자,한글 가능 8~15글자\n닉네임을 입력해주세요.");
