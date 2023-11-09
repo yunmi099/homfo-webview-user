@@ -1,13 +1,19 @@
 {
   "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@icons/*": ["assets/icons/*"]
+    },
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true,
-    "isolatedModules": true,
+    "resolveJsonModule": true,
+    "isolatedModules": false,
     "jsx": "react",
     "lib": ["es6", "es2017"],
     "moduleResolution": "node",
     "noEmit": true,
+    "typeRoots": ["types"],
     "strict": true,
     "target": "esnext",
     "skipLibCheck": true

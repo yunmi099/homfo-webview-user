@@ -1,33 +1,37 @@
 import React, { useState } from 'react';
 import { Text ,View, TextInput, Button } from 'react-native';
-import { Container, StyledTextInput, StyledButton, ButtonText} from './style';
-const Login = ({ navigation }) => {
-  const [verify, setVerify]= useState(false);
+import { Container, StyledTextInput, StyledText, TextView, LoginButton,VerticalLine, TextButton} from './style';
+import LinearGradient from 'react-native-linear-gradient';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+const Login = ({ navigation }: any) => {
   return (
     <Container>
-        <View style={{flexDirection:'row', marginTop: 20}}>
+          <TextView>
+                <StyledText>안녕하세요:){"\n"}Homfo 입니다.</StyledText>
+          </TextView>
           <StyledTextInput
-            placeholder="전화번호를 입력해주세요"
+            placeholder="아이디를 입력해주세요"
           />
-          <StyledButton set={verify} onPress={()=>{setVerify(true)}}> 
-            <ButtonText set={verify}>
-              인증번호 받기
-            </ButtonText>
-        </StyledButton>
-        </View>
-        {verify?
-        <View style={{flexDirection:'row'}}>
           <StyledTextInput
-            placeholder="인증번호를 입력해주세요"
+            placeholder="비밀번호를 입력해주세요"
           />
-          <StyledButton set={true}  onPress={() => navigation.navigate('Home')}> 
-            <ButtonText set={true}>
-              인증번호 확인
-            </ButtonText>
-          </StyledButton>
-        </View>: null}
-        <View style={{marginTop:20}}>
-          <Button title="회원가입" onPress={()=>navigation.navigate('회원가입')}/>
+           <LoginButton onPress={()=>navigation.navigate('Home')}>
+            <LinearGradient
+              colors={['#3C02FF', '#842CFF']}
+              start={{ x: 0, y: 0 }}
+              end={{ x: 0, y: 1 }}
+              style={{width:"100%", height: "100%", alignItems:'center', justifyContent:'center', borderRadius:7}}
+            >
+
+            <Text style={{fontSize:15, color:'white', fontWeight:"700"}}>로그인</Text>
+           </LinearGradient>
+          </LoginButton>
+        <View style={{marginTop:20,flexDirection:'row', width:"100%", justifyContent:"center", alignItems:'center'}}>
+          <TouchableOpacity  onPress={()=>navigation.navigate('아이디찾기')}><TextButton>아이디 찾기</TextButton></TouchableOpacity>
+          <VerticalLine></VerticalLine>
+          <TouchableOpacity  onPress={()=>navigation.navigate('비밀번호찾기')}><TextButton>비밀번호 찾기</TextButton></TouchableOpacity>
+          <VerticalLine></VerticalLine>
+          <TouchableOpacity onPress={()=>navigation.navigate('회원가입')}><TextButton>회원가입</TextButton></TouchableOpacity>
         </View>
     </Container>
     );
