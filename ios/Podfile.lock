@@ -339,7 +339,7 @@ PODS:
     - ReactCommon/turbomodule/core
   - react-native-splash-screen (3.3.0):
     - React-Core
-  - react-native-webview (12.0.2):
+  - react-native-webview (12.4.0):
     - React-Core
   - React-perflogger (0.71.7)
   - React-RCTActionSheet (0.71.7):
@@ -654,7 +654,7 @@ SPEC CHECKSUMS:
   React-logger: 3f8ebad1be1bf3299d1ab6d7f971802d7395c7ef
   react-native-safe-area-context: 1d596539b05a78f2b346e954e7c577f6f9be7544
   react-native-splash-screen: 4312f786b13a81b5169ef346d76d33bc0c6dc457
-  react-native-webview: 203b6a1c7507737f777c91d7e10c30e7e67c1a17
+  react-native-webview: 65f1143983cfeaedf02fd25b2621d3f4a37075de
   React-perflogger: 2d505bbe298e3b7bacdd9e542b15535be07220f6
   React-RCTActionSheet: 0e96e4560bd733c9b37efbf68f5b1a47615892fb
   React-RCTAnimation: fd138e26f120371c87e406745a27535e2c8a04ef
@@ -679,4 +679,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 6e2158db058d9d5be8bd4dffce9ce9effe7cc861
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.14.2

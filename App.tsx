@@ -1,4 +1,5 @@
 import React,{useEffect} from 'react';
+import { AppRegistry } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import SplashScreen from 'react-native-splash-screen';
@@ -89,3 +90,5 @@ const App = () =>  {
 };
 
 export default App;
+
+AppRegistry.registerComponent('webview', () => App);
