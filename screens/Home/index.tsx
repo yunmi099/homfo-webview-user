@@ -6,12 +6,12 @@ const Home = () => {
   return(
     <SafeAreaView style={{width:"100%", height:"100%",backgroundColor:'white'}}>
       <WebView
-      source={{uri: 'https://https://dev.homfo.co.kr/'}}
+      source={{uri: 'https://dev.homfo.co.kr/'}}
       // source={{uri: 'http://localhost:3000'}}
       javaScriptEnabled={true}
       useWebKit={true}
       />
-    </SafeAreaView>
+    </SafeAreaView> 
   );
 };
 // source={{uri: 'https://development.web-user-c1x.pages.dev'}}

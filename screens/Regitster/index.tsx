@@ -112,7 +112,7 @@ const Register = ({ navigation }: any) => {
   return (
       <Container>
         <Header title={"회원가입"}/>
-        <Image source={registerIcon.noneCheck}/>
+        {/* <Image source={registerIcon.noneCheck}/> */}
         <Block>
         {step===0&&
         <>

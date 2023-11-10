@@ -1,5 +1,5 @@
 {
-  "name": "webview",
+  "name": "홈포",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -30,7 +30,7 @@
     "react-native-screens": "^3.20.0",
     "react-native-splash-screen": "^3.3.0",
     "react-native-vector-icons": "^9.2.0",
-    "react-native-webview": "^12.0.2",
+    "react-native-webview": "^12.4.0",
     "react-navigation": "^4.4.4",
     "styled-components": "^6.0.5",
     "zustand": "^4.4.1"
