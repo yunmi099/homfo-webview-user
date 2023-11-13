@@ -14,16 +14,16 @@ import ResultPassword from './screens/FindAccount/FindPassword/result';
 import { RecoilRoot } from 'recoil';
 const Stack = createStackNavigator();
 const App = () =>  {
-  useEffect(() => {
-    try {
-      setTimeout(() => {
-        SplashScreen.hide()
-      }, 2000);
-    } catch (e) {
-      console.warn('Error Occured');
-      console.warn(e);
-    }
-  });
+  // useEffect(() => {
+  //   try {
+  //     setTimeout(() => {
+  //       SplashScreen.hide()
+  //     }, 2000);
+  //   } catch (e) {
+  //     console.warn('Error Occured');
+  //     console.warn(e);
+  //   }
+  // });
   return (
   <RecoilRoot>
     <NavigationContainer>
@@ -106,5 +106,3 @@ const App = () =>  {
 };
 
 export default App;
-
-AppRegistry.registerComponent('webview', () => App);
