@@ -1,5 +1,5 @@
 {
-  "name": "홈포",
+  "name": "homfo",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -21,7 +21,7 @@
     "eslint-config-prettier": "^8.8.0",
     "eslint-plugin-react-native": "^4.0.0",
     "react": "18.2.0",
-    "react-native": "0.71.7",
+    "react-native": "0.72.6",
     "react-native-gesture-handler": "^2.9.0",
     "react-native-linear-gradient": "^2.8.2",
     "react-native-modal-datetime-picker": "^15.0.0",
