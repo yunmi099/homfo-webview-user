@@ -1,9 +1,25 @@
-import React, { useState } from 'react';
-import { Text ,View, TextInput, Button } from 'react-native';
+import React, { useRef, useState } from 'react';
+import { Text ,View, TextInput, Button, Alert } from 'react-native';
 import { Container, StyledTextInput, StyledText, TextView, LoginButton,VerticalLine, TextButton} from './style';
 import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { signIn } from '../../store/api/login';
+import { UserInfo } from '../../store/interface/login';
+import { useRecoilState } from 'recoil';
+import { userAtom } from '../../recoil/loginAtom';
 const Login = ({ navigation }: any) => {
+  const [id, setId] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [userInfo, setUserInfo]  = useRecoilState<UserInfo>(userAtom);
+  const onLoginEvent = async ()=>{
+    if (await signIn(id, password, setUserInfo)){
+      navigation.navigate('Home');
+    } else {
+      setId("");
+      setPassword("");
+    }
+  }
+
   return (
     <Container>
           <TextView>
@@ -11,11 +27,18 @@ const Login = ({ navigation }: any) => {
           </TextView>
           <StyledTextInput
             placeholder="아이디를 입력해주세요"
+            value = {id}
+            onChangeText={(text: string) => setId(text)}
+            maxLength={15}
+            autoCorrect={false}
+            autoCapitalize={"none"}
           />
           <StyledTextInput
             placeholder="비밀번호를 입력해주세요"
+            value = {password}
+            onChangeText={(text: string) => setPassword(text)}
           />
-           <LoginButton onPress={()=>navigation.navigate('Home')}>
+           <LoginButton onPress={()=>onLoginEvent()}>
             <LinearGradient
               colors={['#3C02FF', '#842CFF']}
               start={{ x: 0, y: 0 }}

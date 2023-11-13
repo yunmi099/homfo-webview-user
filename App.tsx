@@ -11,6 +11,7 @@ import FindID from './screens/FindAccount/FindID';
 import FindPassword from './screens/FindAccount/FindPassword';
 import ResultId from './screens/FindAccount/FindID/result';
 import ResultPassword from './screens/FindAccount/FindPassword/result';
+import { RecoilRoot } from 'recoil';
 const Stack = createStackNavigator();
 const App = () =>  {
   useEffect(() => {
@@ -24,15 +25,29 @@ const App = () =>  {
     }
   });
   return (
+  <RecoilRoot>
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name="Splash" component={Splash} options={{headerShown:false}}/>
-        <Stack.Screen name="Home" component={Home} options={{headerShown:false}}/>
+        <Stack.Screen 
+            name="Splash" 
+            component={Splash}
+            options={{
+                headerShown:false,
+                gestureEnabled: false,
+                    }}/>
+        <Stack.Screen
+            name="Home" 
+            component={Home}
+            options={{
+              headerShown:false,
+              gestureEnabled: false,
+              }}/>
         <Stack.Screen
           name="로그인"
           component={Login}
           options={{
             headerShown: false,
+            gestureEnabled: false, 
           }}
         />
           <Stack.Screen
@@ -86,6 +101,7 @@ const App = () =>  {
                   }}/>
       </Stack.Navigator>
     </NavigationContainer>
+  </RecoilRoot>
   );
 };
 

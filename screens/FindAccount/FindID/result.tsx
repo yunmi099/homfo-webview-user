@@ -39,9 +39,9 @@ const ResultId = ({navigation}:any) => {
             :<FoundIdText>{error}</FoundIdText>)
         :<ActivityIndicator/>}</FoundIdBox>
         <ConfirmButton
-         title={error.length === 0 ? "로그인 하기" : "회원가입 하기"}
-         location={error.length === 0 ? "로그인" : "회원가입"}
-         navigation={navigation}
+            title={error.length === 0 ? "로그인 하기" : "회원가입 하기"}
+            location={error.length === 0 ? "로그인" : "회원가입"}
+            navigation={navigation}
         />
     </Container>
     );

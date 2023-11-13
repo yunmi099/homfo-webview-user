@@ -11,12 +11,14 @@ import PhoneAuth from '../../components/phonenumberAuthentication';
 import { useDebounce } from '../../hooks/useDebounce';
 import ConfirmButton from '../../components/button/confirmButton';
 import * as registerIcon from '../../assets/icons/register/registerIcon'
+import usePhoneNumberStore from '../../store/context/useNumberStore';
 const Register = ({ navigation }: any) => {
   const [jobSetting, setJob] = useState<boolean>(false);
   const [step, setStep] = useState<number>(0);
   const [verifyComplete, setVerifyComplete]=useState(false);
   const [message, setMessage] = useState({"nickname":"영문(대소문자가능),숫자,한글 가능 8~15글자 {'\n'}닉네임을 입력해주세요.", "id":"영문,숫자만 포함 8-15글자의 아이디를 입력해주세요.", "password":"영문,숫자,특수기호 포함 8~15글자의 비밀번호를 입력해주세요."});
   const [color, setColor]= useState({"nickname":"#D1D1D1","id":"#D1D1D1","password":"#D1D1D1"});
+  const {phonenumber, setPhonenumber} = usePhoneNumberStore();
   const [formData, setFormData] = useState<UserFormData>({
     userAccount: "",
     userPassword: "",
@@ -49,6 +51,7 @@ const Register = ({ navigation }: any) => {
       } else{
         data = {...formData}
       } 
+      console.log(data)
       const res: AxiosResponse = await fetchFromApi('POST',`/users/sign-up`, data);
       console.log(res.data);
       navigation.navigate('Home')
@@ -95,25 +98,25 @@ const Register = ({ navigation }: any) => {
    }
   }, [debouncedNickname]);
   const idRegex =  /^[a-zA-Z0-9]{8,15}$/
-  // const debouncedID = useDebounce(formData.userAccount, 500);
-  // useEffect(() => {
-  //  if(debouncedID.length===0){
-  //      setMessage("영문(대소문자가능),숫자,한글 가능 8~15글자\n닉네임을 입력해주세요.");
-  //      setColor("#D1D1D1");
-  //  } else if (debouncedNickname.length<=15){
-  //    if (idRegex.test(formData.nickName)){
-  //      setMessage("영문(대소문자가능),숫자,한글로 15글자이내로 입력해주세요.");
-  //      setColor("#FF6666");
-  //    } else {
-  //      doubleCheck(debouncedNickname);
-  //    }
-  //  }
-  // }, [debouncedNickname]);
+  const debouncedId = useDebounce(formData.userAccount, 500);
+  useEffect(() => {
+    if(debouncedId.length===0){
+        setMessage(prev=>({...prev,"id":"영문,숫자만 포함 8-15글자의 아이디를 입력해주세요."}));
+        setColor(prev=>({...prev,"id":"#D1D1D1"}));
+    } else if (debouncedId.length<=15){
+      if (idRegex.test(formData.userAccount)){
+         setMessage(prev=>({...prev,"id":"영문,숫자만 포함 8-15글자의 아이디를 입력해주세요."}));
+         setColor(prev=>({...prev,"id":"#D1D1D1"}));
+      } else {
+        // doubleCheck(debouncedNickname);
+      }
+    }
+   }, [debouncedNickname]);
   return (
       <Container>
         <Header title={"회원가입"}/>
         {/* <Image source={registerIcon.noneCheck}/> */}
-        <Block>
+        {/* <Block>
         {step===0&&
         <>
           <StyledText>닉네임</StyledText>
@@ -137,7 +140,7 @@ const Register = ({ navigation }: any) => {
             autoCapitalize={"none"}
           />
           <HorizontalLine/>
-          <CommentText color={"lightgrey"}>영문,숫자만 포함 8-15글자의 아이디를 입력해주세요.</CommentText>
+          <CommentText color={color.id}>{message.id}</CommentText>
           <StyledText>비밀번호</StyledText>
           <StyledTextInput
             secureTextEntry={true}
@@ -207,6 +210,7 @@ const Register = ({ navigation }: any) => {
                 autoCorrect={false} maxLength={20} autoCapitalize={"none"} /> : null
           }
           <StyledText>생년월일</StyledText>
+
           <DatePickerModal setBirth={setFormData} />
           <HorizontalLine/>
         </>}
@@ -215,8 +219,8 @@ const Register = ({ navigation }: any) => {
             step===2&&<PhoneAuth verifyComplete={verifyComplete} setVerifyComplete={setVerifyComplete}/>
           }
           {
-            step===2?<ConfirmButton title="로그인" navigation={navigation} location='로그인'/>:<ConfirmButton title="다음" onPress={()=>setStep(step+1)}/>
-          }
+            step===2?<ConfirmButton title="가입하기" onPress={()=>registerUserInfo()} navigation={navigation} location='로그인'/>:<ConfirmButton title="다음" onPress={()=>setStep(step+1)}/>
+          } */}
       </Container>
   );
 };

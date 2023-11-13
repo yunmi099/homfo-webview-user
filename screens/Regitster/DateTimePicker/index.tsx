@@ -15,6 +15,7 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
   const adultYear = year - 19;
   const maxDate = new Date(adultYear, 11, 31);
   const [date, onChangeDate] = useState(maxDate);
+  const [selectedDate, setSelectedDate] = useState<string|null>(null)
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -25,6 +26,7 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
   }, []);
 
   const onPressDate = () => {
+    setSelectedDate(formatISO(maxDate).substring(0,10))
     setVisible(true);
   };
 
@@ -35,7 +37,9 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
       "dateOfBirth": formatISO(selectedDate).substring(0,10),
     }));
     onChangeDate(selectedDate);
+    setSelectedDate(formatISO(selectedDate).substring(0,10))
   };
+
 
   const onCancel = () => {
     setVisible(false);
@@ -45,8 +49,8 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
   return (
     <View style={{marginLeft:"6.8%"}}>
       <Pressable onPress={onPressDate}>
-      {date?<StyledText>생년월일을 선택해주세요.</StyledText>:
-        <StyledText>yyyy / mm / dd</StyledText>}
+      {selectedDate?<StyledText>{selectedDate}</StyledText>:
+        <StyledText>생년월일을 선택해 주세요</StyledText>}
       </Pressable>
       <DateTimePickerModal
         isVisible={visible}
