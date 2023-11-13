@@ -1,15 +1,25 @@
 import React, {useEffect, useRef, useState} from 'react';
 import WebView from 'react-native-webview';
-import { SafeAreaView } from 'react-native';
+import { Alert, SafeAreaView } from 'react-native';
+import { useRecoilState} from 'recoil';
+import { userAtom } from '../../recoil/loginAtom';
 const Home = () => {
-  const ref = useRef<WebView>(null);
+  const webViewRef = useRef<WebView>(null);
+  const [userInfo, setUserInfo] = useRecoilState(userAtom);
+  useEffect(()=>{
+    if (userInfo!==undefined){
+      webViewRef?.current?.postMessage(JSON.stringify(userInfo))
+      Alert.alert("사용자 정보 전송 !!!!")
+    }
+  },[userInfo])
   return(
     <SafeAreaView style={{width:"100%", height:"100%",backgroundColor:'white'}}>
       <WebView
-      source={{uri: 'https://dev.homfo.co.kr/'}}
-      // source={{uri: 'http://localhost:3000'}}
-      javaScriptEnabled={true}
-      useWebKit={true}
+        ref={ webViewRef}
+        source={{uri: 'https://dev.homfo.co.kr/'}}
+        // source={{uri: 'http://localhost:3000'}}
+        // onMessage={onMessage}
+        javaScriptEnabled={true}
       />
     </SafeAreaView> 
   );

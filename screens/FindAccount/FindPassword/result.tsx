@@ -9,6 +9,7 @@ const ResultPassword = ({navigation}:any) => {
     <Container>
         <Header title={"비밀번호 찾기"}/>
         <NotifyText>비밀번호를 재설정 해주세요</NotifyText>
+        
     </Container>
 );
 }
