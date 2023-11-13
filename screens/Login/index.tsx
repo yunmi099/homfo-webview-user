@@ -12,12 +12,12 @@ const Login = ({ navigation }: any) => {
   const [password, setPassword] = useState<string>("");
   const [userInfo, setUserInfo]  = useRecoilState<UserInfo>(userAtom);
   const onLoginEvent = async ()=>{
-    if (await signIn(id, password, setUserInfo)){
+    // if (await signIn(id, password, setUserInfo)){
       navigation.navigate('Home');
-    } else {
+    // } else {
       setId("");
       setPassword("");
-    }
+    // }
   }
 
   return (
