@@ -27,6 +27,7 @@ const Login = ({ navigation }: any) => {
           </TextView>
           <StyledTextInput
             placeholder="아이디를 입력해주세요"
+            placeholderTextColor ="lightgrey"
             value = {id}
             onChangeText={(text: string) => setId(text)}
             maxLength={15}
@@ -35,6 +36,7 @@ const Login = ({ navigation }: any) => {
           />
           <StyledTextInput
             placeholder="비밀번호를 입력해주세요"
+            placeholderTextColor ="lightgrey"
             value = {password}
             onChangeText={(text: string) => setPassword(text)}
           />
@@ -54,7 +56,7 @@ const Login = ({ navigation }: any) => {
           <VerticalLine></VerticalLine>
           <TouchableOpacity  onPress={()=>navigation.navigate('비밀번호찾기')}><TextButton>비밀번호 찾기</TextButton></TouchableOpacity>
           <VerticalLine></VerticalLine>
-          <TouchableOpacity onPress={()=>navigation.navigate('회원가입')}><TextButton>회원가입</TextButton></TouchableOpacity>
+          <TouchableOpacity onPress={()=>navigation.navigate('이용 약관 동의')}><TextButton>회원가입</TextButton></TouchableOpacity>
         </View>
     </Container>
     );

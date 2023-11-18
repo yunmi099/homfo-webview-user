@@ -11,8 +11,10 @@ import FindID from './screens/FindAccount/FindID';
 import FindPassword from './screens/FindAccount/FindPassword';
 import ResultId from './screens/FindAccount/FindID/result';
 import ResultPassword from './screens/FindAccount/FindPassword/result';
+import Agreement from './screens/Agreement';
 import { RecoilRoot } from 'recoil';
 const Stack = createStackNavigator();
+import SearchScreen from './screens/SearchNaver';
 const App = () =>  {
   // useEffect(() => {
   //   try {
@@ -98,7 +100,25 @@ const App = () =>  {
             headerBackTitleVisible: false,
             headerTintColor:'black',
             headerShadowVisible: false 
-                  }}/>
+        }}/>
+        <Stack.Screen 
+          name="이용 약관 동의" 
+          component={Agreement}
+          options={{
+            title: '',
+            headerBackTitleVisible: false,
+            headerTintColor:'black',
+            headerShadowVisible: false 
+        }}/>
+        <Stack.Screen 
+          name="네이버 검색" 
+          component={SearchScreen}
+          options={{
+            title: '',
+            headerBackTitleVisible: false,
+            headerTintColor:'black',
+            headerShadowVisible: false 
+        }}/>
       </Stack.Navigator>
     </NavigationContainer>
   </RecoilRoot>

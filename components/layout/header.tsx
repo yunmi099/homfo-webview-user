@@ -7,7 +7,7 @@ interface HeaderProps {
 
 const Header = ({ title }: HeaderProps) => {
   return (
-   <Text style={{marginLeft: '7.5%',marginTop: '3%', fontSize: 28, fontWeight:"500"}}>{title}</Text>
+   <Text style={{marginLeft: '7.5%',marginTop: '3%', fontSize: 28.5, fontWeight:"400"}}>{title}</Text>
   );
 };
 

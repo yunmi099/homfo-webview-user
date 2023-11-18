@@ -1,24 +1,20 @@
 import React, {useEffect, useRef, useState} from 'react';
-import WebView, { WebViewMessageEvent } from 'react-native-webview';
 import { Alert, SafeAreaView } from 'react-native';
-import { useRecoilState} from 'recoil';
+import WebView from 'react-native-webview';
+import { useRecoilState } from 'recoil';
 import { userAtom } from '../../recoil/loginAtom';
-const Home = ({ navigation }: any) => {
+import {  WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
+
+const Agreement = ({ navigation }: any) => {
   const webViewRef = useRef<WebView>(null);
-  const [userInfo, setUserInfo] = useRecoilState(userAtom);
-  useEffect(()=>{
-    if (userInfo!==undefined){
-      webViewRef?.current?.postMessage(JSON.stringify(userInfo))
-      Alert.alert("사용자 정보 전송 !!!!")
-    }
-  },[userInfo])
   const onMessage = (event: WebViewMessageEvent) => {
     const data = event.nativeEvent.data;
-     if (data!=="React App") {
-      navigation.navigate("네이버 검색", {searchQuery: data})
-     }
-
+    if (data === "register") {
+        navigation.navigate('회원가입')
+    }
   };
+  
+
   return(
     <SafeAreaView style={{width:"100%", height:"100%",backgroundColor:'white'}}>
       <WebView
@@ -26,8 +22,8 @@ const Home = ({ navigation }: any) => {
         originWhitelist={['*']}
         startInLoadingState
         injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
-        source={{uri: 'https://dev.homfo.co.kr'}}
-        // source={{uri: 'http://localhost:3000/system/agreement-of-termsofuse'}}
+        // source={{uri: 'https://dev.homfo.co.kr/system/agreement-of-termsofuse'}}
+        source={{uri: 'http://localhost:3000/system/agreement-of-termsofuse'}}
         javaScriptEnabled={true}
         onMessage={onMessage}
         mediaCapturePermissionGrantType="grant"
@@ -44,4 +40,4 @@ const Home = ({ navigation }: any) => {
   );
 };
 // source={{uri: 'https://development.web-user-c1x.pages.dev'}}
-export default Home;
+export default Agreement;
