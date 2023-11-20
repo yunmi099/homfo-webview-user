@@ -1,3 +1,4 @@
+export {type UserFormData};
 interface UserFormData {
 	userAccount: string;
 	userPassword: string;

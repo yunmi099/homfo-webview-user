@@ -3,14 +3,11 @@ import { Text ,View, TextInput, Button, Alert } from 'react-native';
 import { Container, StyledTextInput, StyledText, TextView, LoginButton,VerticalLine, TextButton} from './style';
 import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import { signIn } from '../../store/api/login';
-import { UserInfo } from '../../store/interface/login';
-import { useRecoilState } from 'recoil';
-import { userAtom } from '../../recoil/loginAtom';
+import { useUserStore } from '../../store/context/useUserStore';
 const Login = ({ navigation }: any) => {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-  const [userInfo, setUserInfo]  = useRecoilState<UserInfo>(userAtom);
+  const {userInfo, setUserInfo} = useUserStore();
   const onLoginEvent = async ()=>{
     // if (await signIn(id, password, setUserInfo)){
       navigation.navigate('Home');

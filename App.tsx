@@ -1,8 +1,6 @@
 import React,{useEffect} from 'react';
-import { AppRegistry } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
-import SplashScreen from 'react-native-splash-screen';
 import Login from './screens/Login';
 import Register from './screens/Regitster';
 import Splash from './screens/Splash';
@@ -12,22 +10,10 @@ import FindPassword from './screens/FindAccount/FindPassword';
 import ResultId from './screens/FindAccount/FindID/result';
 import ResultPassword from './screens/FindAccount/FindPassword/result';
 import Agreement from './screens/Agreement';
-import { RecoilRoot } from 'recoil';
 const Stack = createStackNavigator();
 import SearchScreen from './screens/SearchNaver';
 const App = () =>  {
-  // useEffect(() => {
-  //   try {
-  //     setTimeout(() => {
-  //       SplashScreen.hide()
-  //     }, 2000);
-  //   } catch (e) {
-  //     console.warn('Error Occured');
-  //     console.warn(e);
-  //   }
-  // });
   return (
-  <RecoilRoot>
     <NavigationContainer>
       <Stack.Navigator>
         <Stack.Screen 
@@ -121,7 +107,6 @@ const App = () =>  {
         }}/>
       </Stack.Navigator>
     </NavigationContainer>
-  </RecoilRoot>
   );
 };
 

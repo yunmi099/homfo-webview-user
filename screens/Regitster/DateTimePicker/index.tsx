@@ -3,8 +3,7 @@ import { Pressable, View } from "react-native";
 import { format, formatISO } from "date-fns";
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import { StyledText } from "./style";
-import '../interface';
-import { ko } from "date-fns/locale";
+import { UserFormData } from "../../../store/interface/userForm";
 
 interface DatePickerModalProps {
   setBirth: React.Dispatch<React.SetStateAction<UserFormData>>;

@@ -1,11 +1,10 @@
 import React, {useEffect, useRef, useState} from 'react';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
 import { Alert, SafeAreaView } from 'react-native';
-import { useRecoilState} from 'recoil';
-import { userAtom } from '../../recoil/loginAtom';
+import { useUserStore } from '../../store/context/useUserStore';
 const Home = ({ navigation }: any) => {
   const webViewRef = useRef<WebView>(null);
-  const [userInfo, setUserInfo] = useRecoilState(userAtom);
+  const {userInfo} = useUserStore();
   useEffect(()=>{
     if (userInfo!==undefined){
       webViewRef?.current?.postMessage(JSON.stringify(userInfo))

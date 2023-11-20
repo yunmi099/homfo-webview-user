@@ -1,9 +1,8 @@
 import { Alert } from "react-native";
 import { fetchFromApi } from "../../utils/axios";
 import { UserInfo } from "../interface/login";
-import { SetterOrUpdater } from "recoil";
 
-export const signIn = async (id: string, password: string, setUserInfo: SetterOrUpdater<UserInfo>) => {
+export const signIn = async (id: string, password: string, setUserInfo:(newUser: UserInfo) => void) => {
     try {
       let body = {
         userAccount: id,
@@ -11,7 +10,6 @@ export const signIn = async (id: string, password: string, setUserInfo: SetterOr
       }
       const res = await fetchFromApi('POST',`/users/sign-in`, body);
       setUserInfo(res.data);
-
       return true;
     } catch (error: any) {
       Alert.alert(error.response.data.message)

@@ -1,8 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import { Alert, SafeAreaView } from 'react-native';
 import WebView from 'react-native-webview';
-import { useRecoilState } from 'recoil';
-import { userAtom } from '../../recoil/loginAtom';
 import {  WebViewMessageEvent } from 'react-native-webview/lib/WebViewTypes';
 
 const Agreement = ({ navigation }: any) => {
@@ -22,8 +20,8 @@ const Agreement = ({ navigation }: any) => {
         originWhitelist={['*']}
         startInLoadingState
         injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
-        // source={{uri: 'https://dev.homfo.co.kr/system/agreement-of-termsofuse'}}
-        source={{uri: 'http://localhost:3000/system/agreement-of-termsofuse'}}
+        source={{uri: 'https://dev.homfo.co.kr/system/agreement-of-termsofuse'}}
+        // source={{uri: 'http://localhost:3000/system/agreement-of-termsofuse'}}
         javaScriptEnabled={true}
         onMessage={onMessage}
         mediaCapturePermissionGrantType="grant"
