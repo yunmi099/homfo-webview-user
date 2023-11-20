@@ -12,7 +12,6 @@ const Agreement = ({ navigation }: any) => {
     }
   };
   
-
   return(
       <WebView
         ref={ webViewRef}
@@ -20,7 +19,6 @@ const Agreement = ({ navigation }: any) => {
         startInLoadingState
         injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
         source={{uri: 'https://dev.homfo.co.kr/system/agreement-of-termsofuse'}}
-        // source={{uri: 'http://localhost:3000/system/agreement-of-termsofuse'}}
         javaScriptEnabled={true}
         onMessage={onMessage}
         mediaCapturePermissionGrantType="grant"

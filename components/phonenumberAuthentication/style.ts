@@ -1,7 +1,6 @@
 import styled from 'styled-components/native';
 
 export const BoxContainer = styled.View`
-    margin-top: 15%;
     margin-left:8%;
     width:100%;
     height:100%;

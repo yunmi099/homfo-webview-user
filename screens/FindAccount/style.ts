@@ -2,7 +2,8 @@ import styled from 'styled-components/native';
 
 export const NotifyText = styled.Text`
     margin-top: 3%;
-    margin-left: 7.5%;
+    margin-left: 6%;
+    margin-bottom: 15%;
     font-size: 17px;
     color: #646464;
     font-weight: 500;
