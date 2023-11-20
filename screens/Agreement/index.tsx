@@ -14,7 +14,6 @@ const Agreement = ({ navigation }: any) => {
   
 
   return(
-    <SafeAreaView style={{width:"100%", height:"100%",backgroundColor:'white'}}>
       <WebView
         ref={ webViewRef}
         originWhitelist={['*']}
@@ -34,7 +33,6 @@ const Agreement = ({ navigation }: any) => {
         allowsInlineMediaPlayback
         mediaPlaybackRequiresUserAction={false}
       />
-    </SafeAreaView> 
   );
 };
 // source={{uri: 'https://development.web-user-c1x.pages.dev'}}

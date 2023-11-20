@@ -14,6 +14,8 @@ export const FirstStep = ({formData, setFormData, onChangeText}: registerProps)=
     
     const [message, setMessage] = useState({"nickname":"영문(대소문자가능),숫자,한글 가능 8~15글자 {'\n'}닉네임을 입력해주세요.", "id":"영문,숫자만 포함 8-15글자의 아이디를 입력해주세요.", "password":"영문,숫자,특수기호 포함 8~15글자의 비밀번호를 입력해주세요."});
     const [color, setColor]= useState({"nickname":"#D1D1D1","id":"#D1D1D1","password":"#D1D1D1"});
+    const [possible, setPossible]= useState({"nickname":false,"id":false,"password":false});
+    
     const doubleCheck = async (nickname: string): Promise<void> => {
         try {
             const res = await fetchFromApi('GET', `/users/auth/duplicate/nickname/${nickname}`);
