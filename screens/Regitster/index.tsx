@@ -13,6 +13,7 @@ const Register = ({ navigation }: any) => {
   const [step, setStep] = useState<number>(0);
   const [verifyComplete, setVerifyComplete]=useState(false);
   const {phonenumber, setPhonenumber} = usePhoneNumberStore();
+  const [possible, setPossible]= useState({"nickname":false,"account":false,"password":false,"checkPassword":false});
   const [formData, setFormData] = useState<UserFormData>({
     userAccount: "",
     userPassword: "",
@@ -47,8 +48,9 @@ const Register = ({ navigation }: any) => {
         <>
           <FirstStep 
             formData={formData}
-            setFormData={setFormData}
+            possible={possible}
             onChangeText={onChangeText}
+            setPossible={setPossible}
           />
         </>}
 
