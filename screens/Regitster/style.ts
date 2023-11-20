@@ -38,7 +38,6 @@ export const StyledVerifybutton = styled.TouchableOpacity<StyledButtonProps>`
   margin-left: 3px;
 `;
 export const StyledTextInput = styled.TextInput`
-  margin-horizontal: 6.8%;
   height: 30px;
 `;
 
@@ -78,4 +77,15 @@ export const CommentText = styled.Text<CommentTextProps>`
   margin-top: 10px;
   margin-bottom: 20px;
   font-size: 11px;
+`
+export const StyledImage = styled.Image`
+  width: 12px;
+  margin-top:10px;
+  margin-right: 3px;
+  height: 12px;
+`
+export const StyledView = styled.View`
+  flex-direction: row;
+  margin-horizontal: 6.8%;
+  justify-content: space-between;
 `

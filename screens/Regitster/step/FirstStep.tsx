@@ -1,9 +1,9 @@
 import React,{useEffect, useState} from 'react'
-import { StyledText, StyledTextInput, HorizontalLine, CommentText } from '../style'
+import {StyledView, StyledText, StyledTextInput, HorizontalLine, CommentText, StyledImage } from '../style'
 import { fetchFromApi } from '../../../utils/axios';
 import { useDebounce } from '../../../hooks/useDebounce';
 import { UserFormData } from '../../../store/interface/userForm';
-
+import * as registerIcon from '../../../assets/icons/register/registerIcon'
 interface registerProps {
     formData: UserFormData;
     onChangeText: (name: string, value: string) => void;
@@ -124,56 +124,68 @@ export const FirstStep = ({formData, onChangeText, possible, setPossible}: regis
     return(
     <>
         <StyledText>닉네임</StyledText>
-          <StyledTextInput
-            value={formData.nickName}
-            placeholderTextColor ="lightgrey"
-            onChangeText={(text: string) => onChangeText("nickName", text)}
-            placeholder={"닉네임을 입력해주세요."}
-            maxLength={15}
-            autoCorrect={false}
-            autoCapitalize={"none"}
-          />
+        <StyledView>
+            <StyledTextInput
+              value={formData.nickName}
+              placeholderTextColor ="lightgrey"
+              onChangeText={(text: string) => onChangeText("nickName", text)}
+              placeholder={"닉네임을 입력해주세요."}
+              maxLength={15}
+              autoCorrect={false}
+              autoCapitalize={"none"}
+            />
+            <StyledImage source={possible.nickname?registerIcon.check:registerIcon.noneCheck}/>
+          </StyledView>
           <HorizontalLine/>
           <CommentText color={color.nickname}>{message.nickname}</CommentText>
           <StyledText>아이디</StyledText>
-          <StyledTextInput
-            value={formData.userAccount}            
-            placeholderTextColor ="lightgrey"
-            onChangeText={(text: string) => onChangeText("userAccount", text)}
-            placeholder={"아이디를 입력해주세요."}
-            maxLength={15}
-            autoCorrect={false}
-            autoCapitalize={"none"}
-          />
+          <StyledView>
+            <StyledTextInput
+              value={formData.userAccount}            
+              placeholderTextColor ="lightgrey"
+              onChangeText={(text: string) => onChangeText("userAccount", text)}
+              placeholder={"아이디를 입력해주세요."}
+              maxLength={15}
+              autoCorrect={false}
+              autoCapitalize={"none"}
+            />
+            <StyledImage source={possible.account?registerIcon.check:registerIcon.noneCheck}/>
+          </StyledView>
           <HorizontalLine/>
           <CommentText color={color.account}>{message.account}</CommentText>
           <StyledText>비밀번호</StyledText>
-          <StyledTextInput
-            secureTextEntry={true}
-            value={formData.userPassword}
-            placeholderTextColor ="lightgrey"
-            onChangeText={(text: string) => onChangeText("userPassword", text)}
-            placeholder={"비밀번호를 입력해주세요."}
-            maxLength={20}
-            autoCorrect={false}
-            autoCapitalize={"none"}
-          />
+          <StyledView>
+            <StyledTextInput
+              secureTextEntry={true}
+              value={formData.userPassword}
+              placeholderTextColor ="lightgrey"
+              onChangeText={(text: string) => onChangeText("userPassword", text)}
+              placeholder={"비밀번호를 입력해주세요."}
+              maxLength={20}
+              autoCorrect={false}
+              autoCapitalize={"none"}
+            />
+            <StyledImage source={possible.password?registerIcon.check:registerIcon.noneCheck}/>
+          </StyledView>
           <HorizontalLine/>
           <CommentText color={color.password}>{message.password}</CommentText>
           {
             possible.password ? 
             <>
               <StyledText>비밀번호 확인</StyledText>
-              <StyledTextInput
-                value={checkPassword}
-                onChangeText={(text: string) => setCheckPassword(text)}
-                placeholderTextColor ="lightgrey"
-                secureTextEntry={true}
-                placeholder={"다시 한 번 작성해주세요."}
-                maxLength={20}
-                autoCorrect={false}
-                autoCapitalize={"none"}
-              />
+              <StyledView>
+                <StyledTextInput
+                  value={checkPassword}
+                  onChangeText={(text: string) => setCheckPassword(text)}
+                  placeholderTextColor ="lightgrey"
+                  secureTextEntry={true}
+                  placeholder={"다시 한 번 작성해주세요."}
+                  maxLength={20}
+                  autoCorrect={false}
+                  autoCapitalize={"none"}
+                />
+                <StyledImage source={possible.checkPassword?registerIcon.check:registerIcon.noneCheck}/>
+              </StyledView>
               <HorizontalLine/>
               <CommentText color={color.checkPassword}>{message.checkPassword}</CommentText>
             </>:null

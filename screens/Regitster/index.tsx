@@ -30,19 +30,24 @@ const Register = ({ navigation }: any) => {
       [name]: value,
     }));
   };
-  // const handleButtonAuth = ()=>{
-  //   switch (step){
-  //     case 0: 
-  //       if (){
+  const handleButtonAuth = ()=>{
+    switch (step){
+      case 0: 
+        if (possible.account&&possible.nickname&&possible.password&&possible.checkPassword){
+          return true;
+        } else {
+          return false;
+        }
+      case 1: 
+        return true;
+      case 2:
+        return true;
+    }
 
-  //       }
-  //   }
-
-  // }
+  }
   return (
       <Container>
         <Header title={"회원가입"}/>
-        {/* <Image source={registerIcon.noneCheck}/> */}
         <Block>
         {step===0&&
         <>
@@ -83,7 +88,7 @@ const Register = ({ navigation }: any) => {
             />
             :<ConfirmButton 
               title="다음" 
-            // auth={handleButtonAuth()}
+              auth={handleButtonAuth()}
              onPress={()=>setStep(step+1)}
              />
           }
