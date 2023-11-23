@@ -1,5 +1,7 @@
 import { Alert } from "react-native";
 import { UserFormData } from "../interface/userForm";
+import { AxiosResponse } from "axios";
+import { fetchFromApi } from "../../utils/axios";
 
 export const registerUserInfo = async (formData: UserFormData, detailJob: string, phonenumber: string) => {
     try {
@@ -9,9 +11,10 @@ export const registerUserInfo = async (formData: UserFormData, detailJob: string
       } else{
         data = {...formData, userPhoneNum: phonenumber}
       } 
-      // const res: AxiosResponse = await fetchFromApi('POST',`/users/sign-up`, data);
-      // navigation.navigate('Home')
+      const res: AxiosResponse = await fetchFromApi('POST',`/users/sign-up`, data);
+      return true;
     } catch (error: any) {
-        Alert.alert(error.response.data.message)
+      Alert.alert(error.response.data.message)
+      return false;
     }
 };

@@ -1,9 +1,9 @@
 import React,{useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
+import SplashScreen from "react-native-splash-screen";
 import Login from './screens/Login';
 import Register from './screens/Regitster';
-import Splash from './screens/Splash';
 import Home from './screens/Home';
 import FindID from './screens/FindAccount/FindID';
 import FindPassword from './screens/FindAccount/FindPassword';
@@ -12,32 +12,31 @@ import ResultPassword from './screens/FindAccount/FindPassword/result';
 import Agreement from './screens/Agreement';
 const Stack = createStackNavigator();
 import SearchScreen from './screens/SearchNaver';
+import RegisterComplete from './screens/RegisterComplete';
 const App = () =>  {
+  useEffect(() => {
+    setTimeout(() => {
+      SplashScreen.hide();
+    }, 1000); //스플래시 활성화 시간
+  });
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen 
-            name="Splash" 
-            component={Splash}
+          <Stack.Screen
+            name="로그인"
+            component={Login}
             options={{
+              headerShown: false,
+              gestureEnabled: false, 
+            }}
+          />
+          <Stack.Screen
+              name="Home" 
+              component={Home}
+              options={{
                 headerShown:false,
                 gestureEnabled: false,
-                    }}/>
-        <Stack.Screen
-            name="Home" 
-            component={Home}
-            options={{
-              headerShown:false,
-              gestureEnabled: false,
-              }}/>
-        <Stack.Screen
-          name="로그인"
-          component={Login}
-          options={{
-            headerShown: false,
-            gestureEnabled: false, 
-          }}
-        />
+          }}/>
           <Stack.Screen
           name="아이디찾기"
           component={FindID}
@@ -104,6 +103,13 @@ const App = () =>  {
             headerBackTitleVisible: false,
             headerTintColor:'black',
             headerShadowVisible: false 
+        }}/>
+      <Stack.Screen 
+          name="회원가입 완료" 
+          component={RegisterComplete}
+          options={{
+            headerShown: false,
+            gestureEnabled: false, 
         }}/>
       </Stack.Navigator>
     </NavigationContainer>

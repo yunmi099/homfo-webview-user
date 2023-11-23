@@ -47,7 +47,7 @@ export const FirstStep = ({formData, onChangeText, possible, setPossible}: regis
             setColor(prev=>({...prev,[key]:"#FF6666"}));
         }
       };
-      const nickNameRegex = /^[A-Za-z0-9가-힣]{8,15}$/;
+      const nickNameRegex =  /^[가-힣a-zA-Z0-9]{1,15}$/;
       const debouncedNickname = useDebounce(formData.nickName, 500);
       useEffect(() => {
         if (debouncedNickname.length===0){

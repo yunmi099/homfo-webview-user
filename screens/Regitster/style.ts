@@ -89,3 +89,34 @@ export const StyledView = styled.View`
   margin-horizontal: 6.8%;
   justify-content: space-between;
 `
+
+export const GenderView = styled.Pressable`
+  width: 98%;
+  height:42px;
+  border-radius: 5px;
+  background-color:white;
+  justify-content: center;
+  align-items: center;
+`
+export const GenderContainer = styled.View`
+ flex-direction: row;
+ justify-content: center;
+ margin-vertical: 10px;
+`
+
+export const GenderText = styled.Text`
+  font-size: 19px;
+  color: #9D11FF;
+`
+export const NGenderView = styled.Pressable`
+  width: 43.2%; 
+  height:42px;
+  border-radius: 5px;
+  background-color:#F0F0F0;
+  justify-content: center;
+  align-items: center;
+`
+export const NGenderText = styled.Text`
+  font-size: 19px;
+  color: #D1D1D1;
+` 

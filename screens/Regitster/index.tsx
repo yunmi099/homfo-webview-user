@@ -24,6 +24,11 @@ const Register = ({ navigation }: any) => {
     dateOfBirth: ""
   });
   const [detailJob, setDetailJob] = useState<string>("");
+  const handleRegister = async ()=>{
+    // if (await registerUserInfo(formData, detailJob, phonenumber)){
+      navigation.navigate("회원가입 완료")
+    // }
+  }
   const onChangeText = (name: string, value: string) => {
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -39,7 +44,21 @@ const Register = ({ navigation }: any) => {
           return false;
         }
       case 1: 
-        return true;
+        if (
+          formData.gender.length !== 0 &&
+          formData.dateOfBirth.length !== 0 &&
+          formData.job !== null &&
+          formData.job !== undefined
+        ) {
+          if (formData.job.length > 0) {
+            if (formData.job === "기타") {
+              return detailJob.length !== 0;
+            } else {
+              return true;
+            }
+          }
+        }
+      return false;
       case 2:
         return true;
     }
@@ -80,16 +99,16 @@ const Register = ({ navigation }: any) => {
           {
             step===2?
             <ConfirmButton
-              title="가입하기"
-              auth={false}
-              onPress={()=>registerUserInfo(formData, detailJob, phonenumber)}
+              title="회원가입 완료"
+              // auth={verifyComplete}
+              onPress={()=>handleRegister()}
               navigation={navigation}
               location='로그인'
             />
             :<ConfirmButton 
               title="다음" 
-              auth={handleButtonAuth()}
-             onPress={()=>setStep(step+1)}
+              // auth={handleButtonAuth()}
+              onPress={()=>setStep(step+1)}
              />
           }
       </Container>
