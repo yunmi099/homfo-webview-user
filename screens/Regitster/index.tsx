@@ -25,9 +25,9 @@ const Register = ({ navigation }: any) => {
   });
   const [detailJob, setDetailJob] = useState<string>("");
   const handleRegister = async ()=>{
-    // if (await registerUserInfo(formData, detailJob, phonenumber)){
+    if (await registerUserInfo(formData, detailJob, phonenumber)){
       navigation.navigate("회원가입 완료")
-    // }
+    }
   }
   const onChangeText = (name: string, value: string) => {
     setFormData((prevFormData) => ({
@@ -100,14 +100,12 @@ const Register = ({ navigation }: any) => {
             step===2?
             <ConfirmButton
               title="회원가입 완료"
-              // auth={verifyComplete}
+              auth={verifyComplete}
               onPress={()=>handleRegister()}
-              navigation={navigation}
-              location='로그인'
             />
             :<ConfirmButton 
               title="다음" 
-              // auth={handleButtonAuth()}
+              auth={handleButtonAuth()}
               onPress={()=>setStep(step+1)}
              />
           }
