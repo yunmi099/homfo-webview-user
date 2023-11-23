@@ -4,17 +4,18 @@ import { Container, StyledTextInput, StyledText, TextView, LoginButton,VerticalL
 import LinearGradient from 'react-native-linear-gradient';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import { useUserStore } from '../../store/context/useUserStore';
+import { signIn } from '../../store/api/login';
 const Login = ({ navigation }: any) => {
   const [id, setId] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const {userInfo, setUserInfo} = useUserStore();
   const onLoginEvent = async ()=>{
-    // if (await signIn(id, password, setUserInfo)){
+    if (await signIn(id, password, setUserInfo)){
       navigation.navigate('Home');
-    // } else {
+    } else {
       setId("");
       setPassword("");
-    // }
+    }
   }
 
   return (
@@ -36,6 +37,9 @@ const Login = ({ navigation }: any) => {
             placeholderTextColor ="lightgrey"
             value = {password}
             onChangeText={(text: string) => setPassword(text)}
+            secureTextEntry={true}
+            autoCorrect={false}
+            autoCapitalize={"none"}
           />
            <LoginButton onPress={()=>onLoginEvent()}>
             <LinearGradient

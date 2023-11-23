@@ -25,8 +25,8 @@ const Home = ({ navigation }: any) => {
         originWhitelist={['*']}
         startInLoadingState
         injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
-        source={{uri: 'https://dev.homfo.co.kr'}}
-        // source={{uri: 'http://localhost:3000/system/agreement-of-termsofuse'}}
+        // source={{uri: 'https://dev.homfo.co.kr'}}
+        source={{uri: 'http://localhost:3000'}}
         javaScriptEnabled={true}
         onMessage={onMessage}
         mediaCapturePermissionGrantType="grant"
