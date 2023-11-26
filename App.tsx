@@ -13,6 +13,7 @@ import Agreement from './screens/Agreement';
 const Stack = createStackNavigator();
 import SearchScreen from './screens/SearchNaver';
 import RegisterComplete from './screens/RegisterComplete';
+import Branding from './screens/BrandingPage';
 const App = () =>  {
   useEffect(() => {
     setTimeout(() => {
@@ -22,6 +23,14 @@ const App = () =>  {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+          <Stack.Screen
+            name="Splash"
+            component={Branding}
+            options={{
+              headerShown: false,
+              gestureEnabled: false, 
+            }}
+          />
           <Stack.Screen
             name="로그인"
             component={Login}
