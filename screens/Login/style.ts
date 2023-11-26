@@ -12,19 +12,23 @@ export const StyledTextInput = styled.TextInput`
   margin-horizontal: 7.5%;
 `;
 export const TextView = styled.Text`
-  margin-vertical: 15%;
+  margin-top: 30%;
+  margin-bottom: 15%;
   margin-left: 7.5%;
 `
 export const StyledText = styled.Text`
   font-weight: 600;
   font-size: 25px;
-
 `
 export const LoginButton = styled.TouchableOpacity`
   width: 85%;
   height: 5.7%;
   margin-top: 8px;
+  border-radius: 11px;
+  background-color: #8934FF;
   margin-horizontal: 7.5%;
+  align-items:center;
+  justify-content: center;
 `
 export const Container = styled.SafeAreaView`
   width: 100%;
@@ -40,4 +44,10 @@ export const VerticalLine = styled.View`
 export const TextButton = styled.Text`
   font-weight: 600;
   font-size: 13px;
+`
+
+export const  PurpleText =  styled.Text`
+  color: #8934FF;
+  font-weight: 700;
+  font-size: 25px;
 `

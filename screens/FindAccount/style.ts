@@ -37,6 +37,7 @@ export const InputContainer = styled.View`
   border: 1px solid #D3D3D3;
   width: 88%;
   height: 47;
+  margin-vertical: 3px;
   margin-left: 6%;
 `
 export const StyledTextInput = styled.TextInput`
@@ -56,4 +57,15 @@ export const ButtonText = styled.Text`
   font-style: normal;
   font-weight: 600;
   line-height: normal;
+`
+interface CommentTextProps {
+  color: string; // Add a color prop
+}
+
+export const CommentText = styled.Text<CommentTextProps>`
+  color: ${(props) => props.color};
+  margin-left:6.8%;
+  margin-top: 5px;
+  margin-bottom: 20px;
+  font-size: 11px;
 `

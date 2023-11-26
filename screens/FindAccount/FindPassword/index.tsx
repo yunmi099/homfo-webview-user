@@ -4,8 +4,7 @@ import Header from "../../../components/layout/header";
 import PhoneAuth from "../../../components/phonenumberAuthentication";
 import ConfirmButton from "../../../components/button/confirmButton";
 const FindPassword = ({navigation}:any) => {
-    // const [verifyComplete, setVerifyComplete] = useState(false);
-    const [verifyComplete, setVerifyComplete] = useState(true);
+    const [verifyComplete, setVerifyComplete] = useState(false);
     return(
     <Container>
         <Header title={"비밀번호 찾기"}/>

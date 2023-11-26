@@ -18,7 +18,7 @@ const Agreement = ({ navigation }: any) => {
         originWhitelist={['*']}
         startInLoadingState
         injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
-        source={{uri: 'https://dev.homfo.co.kr/system/agreement-of-termsofuse'}}
+        source={{uri: 'https://dev-webview.homfo.co.kr/system/agreement-of-termsofuse'}}
         javaScriptEnabled={true}
         onMessage={onMessage}
         mediaCapturePermissionGrantType="grant"

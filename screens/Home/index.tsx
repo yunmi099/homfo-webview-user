@@ -5,19 +5,20 @@ import { useUserStore } from '../../store/context/useUserStore';
 const Home = ({ navigation }: any) => {
   const webViewRef = useRef<WebView>(null);
   const {userInfo} = useUserStore();
-  useEffect(()=>{
-    if (userInfo!==undefined){
-      webViewRef?.current?.postMessage(JSON.stringify(userInfo))
-      Alert.alert("사용자 정보 전송 !!!!")
-    }
-  },[userInfo])
   const onMessage = (event: WebViewMessageEvent) => {
     const data = event.nativeEvent.data;
-     if (data!=="React App") {
-      navigation.navigate("네이버 검색", {searchQuery: data})
-     }
 
-  };
+      switch (data){
+          case "onLoad":
+            webViewRef?.current?.postMessage(JSON.stringify(userInfo));
+          default:
+            if (data!=="React App"&&data!=="onLoad") {
+              navigation.navigate("네이버 검색", {searchQuery: data})
+             }
+          break;
+      }
+  }
+
   return(
     <SafeAreaView style={{width:"100%", height:"100%",backgroundColor:'white'}}>
       <WebView
@@ -25,8 +26,7 @@ const Home = ({ navigation }: any) => {
         originWhitelist={['*']}
         startInLoadingState
         injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
-        // source={{uri: 'https://dev.homfo.co.kr'}}
-        source={{uri: 'http://localhost:3000'}}
+        source={{uri: 'https://dev-webview.homfo.co.kr'}}
         javaScriptEnabled={true}
         onMessage={onMessage}
         mediaCapturePermissionGrantType="grant"
