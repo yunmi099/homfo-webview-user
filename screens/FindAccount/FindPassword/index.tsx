@@ -10,7 +10,7 @@ const FindPassword = ({navigation}:any) => {
         <Header title={"비밀번호 찾기"}/>
         <NotifyText>가입하신 전화번호를{"\n"}입력해주세요.</NotifyText>
         <PhoneAuth verifyComplete={verifyComplete} setVerifyComplete={setVerifyComplete}/>
-        {verifyComplete&&<ConfirmButton navigation={navigation} title={"확인"} location="비밀번호찾기결과"/>}
+        <ConfirmButton auth={verifyComplete} navigation={navigation} title={"확인"} location="비밀번호찾기결과"/>
     </Container>
 );
 }

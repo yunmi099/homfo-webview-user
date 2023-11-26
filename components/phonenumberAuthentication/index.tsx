@@ -6,6 +6,7 @@ import AuthButton from "./AuthButton";
 import NoneActiveButton from "./NoneActiveButton";
 import usePhoneNumberStore from "../../store/context/useNumberStore";
 import { useIsFocused } from "@react-navigation/native";
+import { fetchFromApi } from "../../utils/axios";
 
 interface PhoneAuthProps {
     verifyComplete: boolean;
@@ -13,7 +14,6 @@ interface PhoneAuthProps {
   }
 
   const PhoneAuth: React.FC<PhoneAuthProps> = (props: PhoneAuthProps) =>{
-    const isFocused = useIsFocused();
     const { isRunning, remainingTime, startTimer, resetTimer} = useTimerStore();
     const {phonenumber, setPhonenumber} = usePhoneNumberStore();
     const [verifyNumber, setVerifynumber]=useState("")
@@ -30,12 +30,12 @@ interface PhoneAuthProps {
     const authenticationRequest = async (): Promise<void> => {
         let data = {'userPhoneNum': phonenumber}
         try {
-            // const res = await fetchFromApi('POST', `/users/sms-auth`,data);
-            // if (res.status === 200) { 
+            const res = await fetchFromApi('POST', `/users/sms-auth`,data);
+            if (res.status === 200) { 
                 setCount(count+1);
                 resetTimer();
                 startTimer();                
-            // }
+            }
         } catch (e:any) {
             Alert.alert(e.response.data.message);
         }
@@ -74,12 +74,12 @@ interface PhoneAuthProps {
             "authNumber": verifyNumber,
           }
         try {
-            // const res = await fetchFromApi('POST', `/users/sms-auth/verify`,data);
-            // if (res.status === 200) {
+            const res = await fetchFromApi('POST', `/users/sms-auth/verify`,data);
+            if (res.status === 200) {
                 resetTimer();
                 props.setVerifyComplete(true);
                 setErrormessage({"mention":"인증확인이 완료 되었습니다.","color":"#39A03E"})
-            // }
+            }
         } catch (e:any) {
             setErrormessage({"mention":e.response.data.message,"color":"#FF6666"})
         }

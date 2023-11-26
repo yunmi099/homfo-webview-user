@@ -4,16 +4,19 @@ interface HeaderProps {
   title: string;
   navigation?:any;
   location?: string;
+  auth?: boolean;
   onPress?: () => void;
 }
 
-const ConfirmButton = ({ title, navigation, location, onPress }: HeaderProps) => {
+const ConfirmButton = ({ title, navigation, location, onPress, auth=true }: HeaderProps) => {
   return (
-    <StyledView onPress={() => {
+    <StyledView 
+    auth={auth}
+    onPress={() => {
       if (navigation) {
         navigation.navigate(location);
       }
-      if (onPress) {
+      if (onPress && auth) {
         onPress();
       }
     }}>

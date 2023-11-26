@@ -38,7 +38,6 @@ export const StyledVerifybutton = styled.TouchableOpacity<StyledButtonProps>`
   margin-left: 3px;
 `;
 export const StyledTextInput = styled.TextInput`
-  margin-horizontal: 6.8%;
   height: 30px;
 `;
 
@@ -79,3 +78,45 @@ export const CommentText = styled.Text<CommentTextProps>`
   margin-bottom: 20px;
   font-size: 11px;
 `
+export const StyledImage = styled.Image`
+  width: 12px;
+  margin-top:10px;
+  margin-right: 3px;
+  height: 12px;
+`
+export const StyledView = styled.View`
+  flex-direction: row;
+  margin-horizontal: 6.8%;
+  justify-content: space-between;
+`
+
+export const GenderView = styled.Pressable`
+  width: 98%;
+  height:42px;
+  border-radius: 5px;
+  background-color:white;
+  justify-content: center;
+  align-items: center;
+`
+export const GenderContainer = styled.View`
+ flex-direction: row;
+ justify-content: center;
+ margin-vertical: 10px;
+`
+
+export const GenderText = styled.Text`
+  font-size: 19px;
+  color: #9D11FF;
+`
+export const NGenderView = styled.Pressable`
+  width: 43.2%; 
+  height:42px;
+  border-radius: 5px;
+  background-color:#F0F0F0;
+  justify-content: center;
+  align-items: center;
+`
+export const NGenderText = styled.Text`
+  font-size: 19px;
+  color: #D1D1D1;
+` 

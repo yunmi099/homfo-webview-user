@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { Pressable, View } from "react-native";
-import { format, formatISO } from "date-fns";
+import { Image, Pressable, View } from "react-native";
+import { format, formatISO, max } from "date-fns";
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
-import { StyledText } from "./style";
-import '../interface';
-import { ko } from "date-fns/locale";
+import {SpaceBetweenView, StyledText } from "./style";
+import { UserFormData } from "../../../store/interface/userForm";
+import * as registerIcon from '../../../assets/icons/register/registerIcon'
 
 interface DatePickerModalProps {
   setBirth: React.Dispatch<React.SetStateAction<UserFormData>>;
@@ -15,7 +15,7 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
   const adultYear = year - 19;
   const maxDate = new Date(adultYear, 11, 31);
   const [date, onChangeDate] = useState(maxDate);
-  const [selectedDate, setSelectedDate] = useState<string|null>(null)
+  const [selectedDate, setSelectedDate] = useState<string|null>(formatISO(maxDate).substring(0,10))
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -26,18 +26,21 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
   }, []);
 
   const onPressDate = () => {
-    setSelectedDate(formatISO(maxDate).substring(0,10))
     setVisible(true);
   };
 
   const onConfirm = (selectedDate: Date) => {
-    setVisible(false);
-    setBirth((prevFormData) => ({
-      ...prevFormData,
-      "dateOfBirth": formatISO(selectedDate).substring(0,10),
-    }));
-    onChangeDate(selectedDate);
-    setSelectedDate(formatISO(selectedDate).substring(0,10))
+    if (formatISO(selectedDate).substring(0,10) !== formatISO(todayDate).substring(0,10)){
+      setVisible(false);
+      setSelectedDate(formatISO(selectedDate).substring(0,10))
+      setBirth((prevFormData) => ({
+        ...prevFormData,
+        "dateOfBirth": formatISO(selectedDate).substring(0,10),
+      })); 
+      onChangeDate(selectedDate);
+    } else {
+      setVisible(false);
+    }
   };
 
 
@@ -49,8 +52,11 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
   return (
     <View style={{marginLeft:"6.8%"}}>
       <Pressable onPress={onPressDate}>
-      {selectedDate?<StyledText>{selectedDate}</StyledText>:
-        <StyledText>생년월일을 선택해 주세요</StyledText>}
+        <SpaceBetweenView>
+          {selectedDate?<StyledText style={{paddingLeft:5}}>{selectedDate}</StyledText>:
+          <StyledText>생년월일을 선택해 주세요</StyledText>}
+          <Image source={registerIcon.calendar} style={{width: 15, height:18, marginTop:10}}/>
+        </SpaceBetweenView>
       </Pressable>
       <DateTimePickerModal
         isVisible={visible}
