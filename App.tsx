@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import SplashScreen from "react-native-splash-screen";
@@ -14,15 +14,45 @@ const Stack = createStackNavigator();
 import SearchScreen from './screens/SearchNaver';
 import RegisterComplete from './screens/RegisterComplete';
 import Branding from './screens/BrandingPage';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 const App = () =>  {
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();
     }, 1000); //스플래시 활성화 시간
   });
+  const getData = async (key:string) => {
+    try {
+      const value = await AsyncStorage.getItem(key);
+      if (value !== null) {
+        console.log(`Data with key ${key} found: ${value}`);
+        return value;
+      } else {
+        console.log(`Data with key ${key} not found.`);
+        return null;
+      }
+    } catch (error) {
+      console.error('Error retrieving data:', error);
+      return null;
+    }
+  };    
+  const checkInitialValue = async () => {
+      try {
+        const initialValue = await getData("initial");
+        if (initialValue === "TRUE") {
+          return true;
+        } else {
+          return false;
+        }
+      } catch (error) {
+        console.error('Error checking initial value:', error);
+        return false;
+      }
+  };
+  checkInitialValue();
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator initialRouteName={ !checkInitialValue()? "Splash" : "로그인"}>
           <Stack.Screen
             name="Splash"
             component={Branding}

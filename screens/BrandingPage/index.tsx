@@ -14,36 +14,6 @@ const Branding = ({ navigation }: any) => {
         }
       };
       
-      const getData = async (key:string) => {
-        try {
-          const value = await AsyncStorage.getItem(key);
-          if (value !== null) {
-            console.log(`Data with key ${key} found: ${value}`);
-            return value;
-          } else {
-            console.log(`Data with key ${key} not found.`);
-            return null;
-          }
-        } catch (error) {
-          console.error('Error retrieving data:', error);
-          return null;
-        }
-      };    
-      useEffect(() => {
-        const checkInitialValue = async () => {
-          try {
-            const initialValue = await getData("initial");
-            if (initialValue === "TRUE") {
-              navigation.navigate("로그인");
-            }
-          } catch (error) {
-            console.error('Error checking initial value:', error);
-          }
-        };
-      
-        checkInitialValue();
-      }, []);
-      
   return (
     <View style={{width:'100%', height:'100%'}}>
         <StyledImage source={branding}/>
