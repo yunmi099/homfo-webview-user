@@ -2,10 +2,11 @@ import React, {useEffect, useRef, useState} from 'react';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
 import { Alert, SafeAreaView } from 'react-native';
 import { useUserStore } from '../../store/context/useUserStore';
-import { storeData } from '../../utils/asyncStorage';
+import { clearAsyncStorage, removeData, storeData } from '../../utils/asyncStorage';
 const Home = ({ navigation }: any) => {
   const webViewRef = useRef<WebView>(null);
   const {userInfo} = useUserStore();
+  const [webViewKey, setWebViewKey] = useState<number>(0); // 상태 추가
   useEffect(()=>{
     if (userInfo !==undefined){
       storeData("token", userInfo.token)
@@ -13,13 +14,22 @@ const Home = ({ navigation }: any) => {
   },[userInfo])
   const onMessage = (event: WebViewMessageEvent) => {
     const data = event.nativeEvent.data;
-      console.log(data);
       switch (data){
           case "onLoad":
             webViewRef?.current?.postMessage(JSON.stringify(userInfo));
             break;
           case "tokenExpired":
             navigation.navigate("로그인");
+            break;
+          case "logout":
+            navigation.navigate("로그인");
+            removeData("token");
+            setWebViewKey((prevKey) => prevKey + 1); // WebView 리로드
+            break;
+          case "withDrawal":
+            navigation.navigate("브랜딩");
+            clearAsyncStorage();
+            setWebViewKey((prevKey) => prevKey + 1); // WebView 리로드
             break;
           default:
             if (data!=="React App"&&data!=="onLoad") {
@@ -32,6 +42,7 @@ const Home = ({ navigation }: any) => {
   return(
     <SafeAreaView style={{width:"100%", height:"100%",backgroundColor:'white'}}>
       <WebView
+        key={webViewKey} // key를 변경하여 리로드
         ref={ webViewRef}
         originWhitelist={['*']}
         startInLoadingState
