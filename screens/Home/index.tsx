@@ -47,14 +47,13 @@ const Home = ({ navigation }: any) => {
         originWhitelist={['*']}
         startInLoadingState
         injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
-        // source={{uri: 'https://dev-webview.homfo.co.kr'}}
-        source={{uri: 'http://localhost:3000'}}
+        source={{uri: 'https://dev-webview.homfo.co.kr'}}
         javaScriptEnabled={true}
         onMessage={onMessage}
         mediaCapturePermissionGrantType="grant"
         userAgent="Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
         domStorageEnabled={true}
-        // cacheEnabled
+        cacheEnabled
         thirdPartyCookiesEnabled
         allowsProtectedMedia
         allowUniversalAccessFromFileURLs
