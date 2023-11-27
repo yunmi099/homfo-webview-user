@@ -10,51 +10,57 @@ import FindPassword from './screens/FindAccount/FindPassword';
 import ResultId from './screens/FindAccount/FindID/result';
 import ResultPassword from './screens/FindAccount/FindPassword/result';
 import Agreement from './screens/Agreement';
-const Stack = createStackNavigator();
 import SearchScreen from './screens/SearchNaver';
 import RegisterComplete from './screens/RegisterComplete';
 import Branding from './screens/BrandingPage';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { getData } from './utils/asyncStorage';
+import { fetchUserInfo } from './store/api/login';
+import { useUserStore } from './store/context/useUserStore';
+const Stack = createStackNavigator();
 const App = () =>  {
+  const {userInfo, setUserInfo} = useUserStore();
+  const [initialRoute, setInitialRoute] = useState<any>(null);
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();
-    }, 1000); //스플래시 활성화 시간
+    }, 1000);
   });
-  const getData = async (key:string) => {
-    try {
-      const value = await AsyncStorage.getItem(key);
-      if (value !== null) {
-        console.log(`Data with key ${key} found: ${value}`);
-        return value;
-      } else {
-        console.log(`Data with key ${key} not found.`);
-        return null;
-      }
-    } catch (error) {
-      console.error('Error retrieving data:', error);
-      return null;
-    }
-  };    
-  const checkInitialValue = async () => {
+  useEffect(() => {
+    const checkInitialValue = async () => {
       try {
         const initialValue = await getData("initial");
         if (initialValue === "TRUE") {
-          return true;
+          const token = await getData("token");
+          if (token !== null) {
+            if (await fetchUserInfo(token, setUserInfo)) {
+              setInitialRoute("Home");
+            } else {
+              setInitialRoute("로그인");
+            }
+          } else {
+            setInitialRoute("로그인");
+          }
         } else {
-          return false;
+          setInitialRoute("브랜딩");
         }
       } catch (error) {
-        console.error('Error checking initial value:', error);
-        return false;
+        setInitialRoute("브랜딩");
       }
-  };
-  checkInitialValue();
+    };
+
+    checkInitialValue();
+  }, []); // 컴포넌트 마운트 시 한 번 실행하도록 빈 의존성 배열을 사용
+
+  if (initialRoute === null) {
+    // 초기 경로가 결정될 때까지 로딩 표시기를 표시할 수 있습니다.
+    return null;
+  }
+
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName={ !checkInitialValue()? "Splash" : "로그인"}>
+      <Stack.Navigator initialRouteName={initialRoute}>
           <Stack.Screen
-            name="Splash"
+            name="브랜딩"
             component={Branding}
             options={{
               headerShown: false,

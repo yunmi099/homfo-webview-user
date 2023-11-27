@@ -2,18 +2,9 @@ import React, { useEffect } from 'react';
 import { View } from 'react-native';
 import { branding } from '../../assets/initialImage';
 import { StyledButton, StyledImage, StyledText } from './style';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { storeData } from '../../utils/asyncStorage';
 
 const Branding = ({ navigation }: any) => {
-    const storeData = async (key:string, value:string) => {
-        try {
-          await AsyncStorage.setItem(key, value);
-          console.log(`Data with key ${key} stored successfully.`);
-        } catch (error) {
-          console.error('Error storing data:', error);
-        }
-      };
-      
   return (
     <View style={{width:'100%', height:'100%'}}>
         <StyledImage source={branding}/>

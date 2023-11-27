@@ -2,19 +2,29 @@ import React, {useEffect, useRef, useState} from 'react';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
 import { Alert, SafeAreaView } from 'react-native';
 import { useUserStore } from '../../store/context/useUserStore';
+import { storeData } from '../../utils/asyncStorage';
 const Home = ({ navigation }: any) => {
   const webViewRef = useRef<WebView>(null);
   const {userInfo} = useUserStore();
+  useEffect(()=>{
+    if (userInfo !==undefined){
+      storeData("token", userInfo.token)
+    }
+  },[userInfo])
   const onMessage = (event: WebViewMessageEvent) => {
     const data = event.nativeEvent.data;
-
+      console.log(data);
       switch (data){
           case "onLoad":
             webViewRef?.current?.postMessage(JSON.stringify(userInfo));
+            break;
+          case "tokenExpired":
+            navigation.navigate("로그인");
+            break;
           default:
             if (data!=="React App"&&data!=="onLoad") {
               navigation.navigate("네이버 검색", {searchQuery: data})
-             }
+             } 
           break;
       }
   }
@@ -25,19 +35,19 @@ const Home = ({ navigation }: any) => {
         ref={ webViewRef}
         originWhitelist={['*']}
         startInLoadingState
-        // injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
+        injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
         // source={{uri: 'https://dev-webview.homfo.co.kr'}}
         source={{uri: 'http://localhost:3000'}}
         javaScriptEnabled={true}
         onMessage={onMessage}
-        // mediaCapturePermissionGrantType="grant"
-        // userAgent="Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
+        mediaCapturePermissionGrantType="grant"
+        userAgent="Mozilla/5.0 (Macintosh; Intel Mac OS X 13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/114.0.0.0 Safari/537.36"
         domStorageEnabled={true}
-        cacheEnabled
+        // cacheEnabled
         thirdPartyCookiesEnabled
-        // allowsProtectedMedia
-        // allowUniversalAccessFromFileURLs
-        // allowsInlineMediaPlayback
+        allowsProtectedMedia
+        allowUniversalAccessFromFileURLs
+        allowsInlineMediaPlayback
         mediaPlaybackRequiresUserAction={false}
       />
     </SafeAreaView> 
