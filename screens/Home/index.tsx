@@ -3,10 +3,12 @@ import WebView, { WebViewMessageEvent } from 'react-native-webview';
 import { Alert, SafeAreaView } from 'react-native';
 import { useUserStore } from '../../store/context/useUserStore';
 import { clearAsyncStorage, removeData, storeData } from '../../utils/asyncStorage';
+
 const Home = ({ navigation }: any) => {
   const webViewRef = useRef<WebView>(null);
   const {userInfo} = useUserStore();
   const [webViewKey, setWebViewKey] = useState<number>(0); // 상태 추가
+
   useEffect(()=>{
     if (userInfo !==undefined){
       storeData("token", userInfo.token)

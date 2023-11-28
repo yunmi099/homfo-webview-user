@@ -2,6 +2,7 @@ import React,{useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createStackNavigator} from '@react-navigation/stack';
 import SplashScreen from "react-native-splash-screen";
+import { BackHandler } from 'react-native';
 import Login from './screens/Login';
 import Register from './screens/Regitster';
 import Home from './screens/Home';
@@ -20,6 +21,17 @@ const Stack = createStackNavigator();
 const App = () =>  {
   const {userInfo, setUserInfo} = useUserStore();
   const [initialRoute, setInitialRoute] = useState<any>(null);
+ useEffect(() => {
+    const backAction = () => {
+      return true;
+    };
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
   useEffect(() => {
     setTimeout(() => {
       SplashScreen.hide();

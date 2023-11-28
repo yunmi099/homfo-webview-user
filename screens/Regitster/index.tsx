@@ -3,7 +3,6 @@ import { Container,  Block, } from './style';
 import Header from '../../components/layout/header';
 import PhoneAuth from '../../components/phonenumberAuthentication';
 import ConfirmButton from '../../components/button/confirmButton';
-import * as registerIcon from '../../assets/icons/register/registerIcon'
 import usePhoneNumberStore from '../../store/context/useNumberStore';
 import { UserFormData } from '../../store/interface/userForm';
 import { FirstStep } from './step/FirstStep';
