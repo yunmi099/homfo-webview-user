@@ -6,13 +6,20 @@ interface StyledButtonProps extends TouchableOpacityProps {
 interface StyledButtonTextProps extends TextProps {
   set?: boolean;
 }
+export const NotifyText = styled.Text`
+    margin-top: 5%;
+    margin-left: 6%;
+    font-size: 16px;
+    color: #646464;
+    font-weight: 400;
+`;
 export const StyledText = styled.Text`
   margin-horizontal: 6.8%;
   margin-vertical: 5%;
   font-size: 18px;
 `;
 export const Block = styled.View`
-  margin-vertical:10%;
+  margin-vertical:5%;
 `;
 export const NumberTextInput = styled.TextInput`
   border: 1px solid;

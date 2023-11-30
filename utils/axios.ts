@@ -1,11 +1,12 @@
 import axios, { AxiosResponse, Method } from 'axios';
 
-const SERVER_DEPOLY_URL = 'https://dev-server.homfo.co.kr/api';
+const SERVER_DEPLOY_URL = 'https://dev-server.homfo.co.kr/api';
 const SERVER_PRODUCTION_URL = 'https://prod-server.homfo.co.kr/api'
 
 
 export const fetchFromApi = async (method: Method | undefined, url: string, data?: any, token?: string): Promise<AxiosResponse> => {
     const headers: any = {};
+    console.log(token)
     if (token) {
         // Add the JWT access token to the 'Authorization' header
         headers.Authorization = token;
@@ -13,6 +14,7 @@ export const fetchFromApi = async (method: Method | undefined, url: string, data
     return axios({
         method,
         url: SERVER_PRODUCTION_URL  + url,
+        // url: SERVER_DEPLOY_URL  + url,
         data,
         headers,
     })

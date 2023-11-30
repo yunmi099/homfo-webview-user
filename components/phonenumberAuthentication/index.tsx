@@ -107,7 +107,7 @@ interface PhoneAuthProps {
         <BoxContainer>
             <Text style={{marginBottom:'3%', fontSize:17.5}}>전화번호</Text>
             <LineContainer>
-                <NumberInput  placeholder="000-0000-0000" value={phonenumber} onChangeText={(text:string)=>setPhonenumber(text)}></NumberInput>
+                <NumberInput placeholderTextColor ="lightgrey" placeholder="000-0000-0000" value={phonenumber} onChangeText={(text:string)=>setPhonenumber(text)}></NumberInput>
                 {isRunning&&<Timer><Text style={{color:'#FF6666'}}>{formatTime(remainingTime)}</Text></Timer>}
                 {currentAuth?
             <TouchableOpacity onPress={()=>handleRequest()}><AuthButton title="인증요청"/></TouchableOpacity>
@@ -116,7 +116,7 @@ interface PhoneAuthProps {
             <HorizontalLine></HorizontalLine>
             {isRunning?
             <LineContainer>
-                <NumberInput  keyboardType="numeric"  placeholder="인증번호를 입력해주세요"  value={verifyNumber} onChangeText={(text:string)=>setVerifynumber(text)}></NumberInput>
+                <NumberInput placeholderTextColor ="lightgrey" keyboardType="numeric"  placeholder="인증번호를 입력해주세요"  value={verifyNumber} onChangeText={(text:string)=>setVerifynumber(text)}></NumberInput>
                 {verifyAuth?<TouchableOpacity onPress={()=>authenticationVerify()}><AuthButton title="인증확인"/></TouchableOpacity>
                 :<View><NoneActiveButton title="인증확인"/></View>}
             </LineContainer>:null}

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Container,  Block, } from './style';
+import { Container,  Block, NotifyText, } from './style';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../../components/layout/header';
 import PhoneAuth from '../../components/phonenumberAuthentication';
 import ConfirmButton from '../../components/button/confirmButton';
-import * as registerIcon from '../../assets/icons/register/registerIcon'
 import usePhoneNumberStore from '../../store/context/useNumberStore';
 import { UserFormData } from '../../store/interface/userForm';
 import { FirstStep } from './step/FirstStep';
@@ -65,8 +65,17 @@ const Register = ({ navigation }: any) => {
 
   }
   return (
-      <Container>
+    <KeyboardAwareScrollView 
+     contentContainerStyle={{ flex: 1}}
+      style={{backgroundColor:'white'}}
+      extraScrollHeight={40}
+      resetScrollToCoords={{ x: 0, y: 0 }} 
+      scrollEnabled={true}
+    >
         <Header title={"회원가입"}/>
+        {
+            step===1&&<NotifyText>사용자에게 적합한 방을 추천드리기 위해서{"\n"}수집하는 정보입니다.</NotifyText>
+        }
         <Block>
         {step===0&&
         <>
@@ -109,7 +118,7 @@ const Register = ({ navigation }: any) => {
               onPress={()=>setStep(step+1)}
              />
           }
-      </Container>
+    </KeyboardAwareScrollView>
   );
 };
 

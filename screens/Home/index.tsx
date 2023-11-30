@@ -1,12 +1,14 @@
 import React, {useEffect, useRef, useState} from 'react';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
-import { Alert, SafeAreaView } from 'react-native';
+import { Alert, SafeAreaView, StatusBar } from 'react-native';
 import { useUserStore } from '../../store/context/useUserStore';
 import { clearAsyncStorage, removeData, storeData } from '../../utils/asyncStorage';
+
 const Home = ({ navigation }: any) => {
   const webViewRef = useRef<WebView>(null);
   const {userInfo} = useUserStore();
   const [webViewKey, setWebViewKey] = useState<number>(0); // 상태 추가
+
   useEffect(()=>{
     if (userInfo !==undefined){
       storeData("token", userInfo.token)
@@ -40,10 +42,11 @@ const Home = ({ navigation }: any) => {
   }
 
   return(
-    <SafeAreaView style={{width:"100%", height:"100%",backgroundColor:'white'}}>
+    <SafeAreaView style={{width:"100%", height:"100%", backgroundColor:'white'}}>
+      <StatusBar barStyle="dark-content" />
       <WebView
         key={webViewKey} // key를 변경하여 리로드
-        ref={ webViewRef}
+        ref={webViewRef}
         originWhitelist={['*']}
         startInLoadingState
         injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
