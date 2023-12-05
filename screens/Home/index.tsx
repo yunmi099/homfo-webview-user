@@ -1,10 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
 import WebView, { WebViewMessageEvent } from 'react-native-webview';
-import { Alert, SafeAreaView, StatusBar } from 'react-native';
+import { Alert, SafeAreaView, StatusBar, View } from 'react-native';
 import { useUserStore } from '../../store/context/useUserStore';
 import { clearAsyncStorage, removeData, storeData } from '../../utils/asyncStorage';
+import { useSafeAreaInsets } from 'react-native-safe-area-context'
 
 const Home = ({ navigation }: any) => {
+  const insets = useSafeAreaInsets();
   const webViewRef = useRef<WebView>(null);
   const {userInfo} = useUserStore();
   const [webViewKey, setWebViewKey] = useState<number>(0); // 상태 추가
@@ -18,7 +20,7 @@ const Home = ({ navigation }: any) => {
     const data = event.nativeEvent.data;
       switch (data){
           case "onLoad":
-            webViewRef?.current?.postMessage(JSON.stringify(userInfo));
+            webViewRef?.current?.postMessage(JSON.stringify({...userInfo, top:insets.top}));
             break;
           case "tokenExpired":
             navigation.navigate("로그인");
@@ -40,10 +42,7 @@ const Home = ({ navigation }: any) => {
           break;
       }
   }
-
   return(
-    <SafeAreaView style={{width:"100%", height:"100%", backgroundColor:'white'}}>
-      <StatusBar barStyle="dark-content" />
       <WebView
         key={webViewKey} // key를 변경하여 리로드
         ref={webViewRef}
@@ -51,6 +50,7 @@ const Home = ({ navigation }: any) => {
         startInLoadingState
         injectedJavaScript="window.ReactNativeWebView.postMessage(document.title)"
         source={{uri: 'https://dev-webview.homfo.co.kr'}}
+        // source={{uri: 'http://localhost:3000/'}}
         javaScriptEnabled={true}
         onMessage={onMessage}
         mediaCapturePermissionGrantType="grant"
@@ -63,7 +63,6 @@ const Home = ({ navigation }: any) => {
         allowsInlineMediaPlayback
         mediaPlaybackRequiresUserAction={false}
       />
-    </SafeAreaView> 
   );
 };
 // source={{uri: 'https://development.web-user-c1x.pages.dev'}}

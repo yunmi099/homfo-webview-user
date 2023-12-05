@@ -5,8 +5,6 @@ import WebView from 'react-native-webview';
 const SearchScreen = ({ navigation , route}: any) => {
   const webViewRef = useRef<WebView>(null);
   return(
-    <SafeAreaView style={{width:"100%", height:"100%",backgroundColor:'white'}}>
-    {
         route.params.searchQuery!==undefined ?       
         <WebView
         ref={ webViewRef}
@@ -24,9 +22,6 @@ const SearchScreen = ({ navigation , route}: any) => {
         allowsInlineMediaPlayback
         mediaPlaybackRequiresUserAction={false}
       />:null
-    }
-
-    </SafeAreaView> 
   );
 };
 // source={{uri: 'https://development.web-user-c1x.pages.dev'}}
