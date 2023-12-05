@@ -19,9 +19,9 @@ const Register = ({ navigation }: any) => {
     userPassword: "",
     nickName: "",
     userPhoneNum: "",
-    gender: "",
-    job: "",
-    dateOfBirth: ""
+    gender: null,
+    job: null,
+    dateOfBirth: null,
   });
   const [detailJob, setDetailJob] = useState<string>("");
   const handleRegister = async ()=>{
@@ -43,24 +43,7 @@ const Register = ({ navigation }: any) => {
         } else {
           return false;
         }
-      case 1: 
-        if (
-          formData.gender.length !== 0 &&
-          formData.dateOfBirth.length !== 0 &&
-          formData.job !== null &&
-          formData.job !== undefined
-        ) {
-          if (formData.job.length > 0) {
-            if (formData.job === "기타") {
-              return detailJob.length !== 0;
-            } else {
-              return true;
-            }
-          }
-        }
-      return false;
-      case 2:
-        return true;
+
     }
 
   }
@@ -74,7 +57,7 @@ const Register = ({ navigation }: any) => {
     >
         <Header title={"회원가입"}/>
         {
-            step===1&&<NotifyText>사용자에게 적합한 방을 추천드리기 위해서{"\n"}수집하는 정보입니다.</NotifyText>
+            step===1&&<NotifyText>선택 항목을 입력하면{"\n"}더 취향에 맞는 방을 찾아드릴 수 있어요</NotifyText>
         }
         <Block>
         {step===0&&

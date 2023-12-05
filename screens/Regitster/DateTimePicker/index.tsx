@@ -15,15 +15,9 @@ const DatePickerModal: React.FC<DatePickerModalProps> = ({ setBirth }) => {
   const adultYear = year - 19;
   const maxDate = new Date(adultYear, 11, 31);
   const [date, onChangeDate] = useState(maxDate);
-  const [selectedDate, setSelectedDate] = useState<string|null>(formatISO(maxDate).substring(0,10))
+  const [selectedDate, setSelectedDate] = useState<string|null>(null)
   const [visible, setVisible] = useState(false);
 
-  useEffect(() => {
-    setBirth((prevFormData) => ({
-      ...prevFormData,
-      "dateOfBirth": formatISO(maxDate).substring(0,10),
-    }));
-  }, []);
 
   const onPressDate = () => {
     setVisible(true);

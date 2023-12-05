@@ -4,7 +4,7 @@ interface UserFormData {
 	userPassword: string;
   nickName: string;
   userPhoneNum: string;
-  gender: string;
-  job: string;
-  dateOfBirth: string;
+  gender: string|null;
+  job: string|null;
+  dateOfBirth: string|null;
 }
