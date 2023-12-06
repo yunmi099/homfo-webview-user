@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { StyledText, StyledTextInput, HorizontalLine, CommentText, StyledView, StyledImage, GenderView, GenderContainer, GenderText, NGenderText, NGenderView } from '../style'
+import { StyledText, StyledTextInput, HorizontalLine, CommentText, StyledView, StyledImage, GenderView, GenderContainer, GenderText, NGenderText, NGenderView, MiniText } from '../style'
 import RNPickerSelect from 'react-native-picker-select';
 import DatePickerModal from '../DateTimePicker';
 import { Image, StyleSheet, Text, View } from 'react-native';
@@ -25,7 +25,7 @@ export const SecondStep = ({formData, setFormData, onChangeText, detailJob, setD
       } 
     return(
     <>
-          <StyledText>성별</StyledText>
+          <StyledText>성별<MiniText>&nbsp;&nbsp;(선택)</MiniText></StyledText>
           <GenderContainer>
             {
               formData.gender === "M" ?             
@@ -52,7 +52,7 @@ export const SecondStep = ({formData, setFormData, onChangeText, detailJob, setD
             : <NGenderView onPress={()=>onChangeText("gender", "W")}><NGenderText>여성</NGenderText></NGenderView>
             }    
           </GenderContainer>
-          <StyledText>직업</StyledText>
+          <StyledText>직업<MiniText>&nbsp;&nbsp;(선택)</MiniText></StyledText>
           <StyledView>
             <RNPickerSelect
               textInputProps={{ underlineColorAndroid: 'transparent' }}
@@ -83,7 +83,7 @@ export const SecondStep = ({formData, setFormData, onChangeText, detailJob, setD
                 autoCorrect={false} maxLength={20} autoCapitalize={"none"} /> : null
           }
           <HorizontalLine style={{marginBottom:20}}/>
-          <StyledText>생년월일</StyledText>
+          <StyledText>생년월일<MiniText>&nbsp;&nbsp;(선택)</MiniText></StyledText>
 
         <DatePickerModal 
             setBirth={setFormData}

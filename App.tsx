@@ -17,29 +17,10 @@ import Branding from './screens/BrandingPage';
 import { getData } from './utils/asyncStorage';
 import { fetchUserInfo } from './store/api/login';
 import { useUserStore } from './store/context/useUserStore';
-import { StatusBar } from 'react-native';
-import { Appearance, AppearanceProvider } from 'react-native-appearance';
 const Stack = createStackNavigator();
 const App = () =>  {
   const {userInfo, setUserInfo} = useUserStore();
   const [initialRoute, setInitialRoute] = useState<any>(null);
-  useEffect(() => {
-    const subscription = Appearance.addChangeListener(({ colorScheme }) => {
-      // colorScheme은 'light' 또는 'dark'입니다.
-      if (colorScheme === 'light') {
-        StatusBar.setBarStyle('dark-content');
-        // StatusBar의 배경색을 흰색으로 설정하려면 아래와 같이 사용할 수 있습니다.
-        StatusBar.setBackgroundColor('white');
-      } else {
-        StatusBar.setBarStyle('light-content');
-        // StatusBar의 배경색을 검정색으로 설정하려면 아래와 같이 사용할 수 있습니다.
-        StatusBar.setBackgroundColor('black');
-      }
-    });
-    return () => {
-      subscription.remove();
-    };
-  }, []);
  useEffect(() => {
     const backAction = () => {
       return true;
@@ -88,7 +69,6 @@ const App = () =>  {
   }
 
   return (
-    <AppearanceProvider>
       <NavigationContainer>
         <Stack.Navigator initialRouteName={initialRoute}>
             <Stack.Screen
@@ -190,7 +170,6 @@ const App = () =>  {
           }}/>
         </Stack.Navigator>
       </NavigationContainer>
-    </AppearanceProvider>
   );
 };
 

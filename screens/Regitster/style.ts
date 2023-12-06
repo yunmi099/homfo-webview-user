@@ -127,3 +127,7 @@ export const NGenderText = styled.Text`
   font-size: 19px;
   color: #D1D1D1;
 ` 
+export const MiniText = styled.Text`
+  font-size: 13px;
+  color: #7E7E7E;
+`
