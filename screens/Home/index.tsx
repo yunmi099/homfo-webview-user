@@ -20,7 +20,7 @@ const Home = ({ navigation }: any) => {
     const data = event.nativeEvent.data;
       switch (data){
           case "onLoad":
-            webViewRef?.current?.postMessage(JSON.stringify({...userInfo, top:insets.top}));
+            webViewRef?.current?.postMessage(JSON.stringify({...userInfo, top:insets.top, bottom:insets.bottom}));
             break;
           case "tokenExpired":
             navigation.navigate("로그인");
