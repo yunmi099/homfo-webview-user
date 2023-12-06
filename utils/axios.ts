@@ -6,6 +6,7 @@ const SERVER_PRODUCTION_URL = 'https://prod-server.homfo.co.kr/api'
 
 export const fetchFromApi = async (method: Method | undefined, url: string, data?: any, token?: string): Promise<AxiosResponse> => {
     const headers: any = {};
+    console.log(token)
     if (token) {
         // Add the JWT access token to the 'Authorization' header
         headers.Authorization = token;

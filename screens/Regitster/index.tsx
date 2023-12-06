@@ -35,18 +35,18 @@ const Register = ({ navigation }: any) => {
       [name]: value,
     }));
   };
-  const handleButtonAuth = ()=>{
-    switch (step){
-      case 0: 
-        if (possible.account&&possible.nickname&&possible.password&&possible.checkPassword){
+    const handleButtonAuth = () => {
+      if (step === 0) {
+        if (possible.account && possible.nickname && possible.password && possible.checkPassword) {
           return true;
         } else {
           return false;
         }
-
+      } else {
+        return true;
+      }
     }
 
-  }
   return (
     <KeyboardAwareScrollView 
      contentContainerStyle={{ flex: 1}}
