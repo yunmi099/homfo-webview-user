@@ -21,7 +21,9 @@ export const HorizontalLine = styled.View`
 export const NumberInput = styled.TextInput`
     position:relative;
     width: 62.34%;
+    padding: 0;
     font-size:13px;
+    color: #D9D9D9;
 `;
 
 export const Timer = styled.View`

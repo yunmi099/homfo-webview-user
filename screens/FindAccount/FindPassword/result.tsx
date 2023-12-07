@@ -30,8 +30,8 @@ const ResultPassword = ({navigation}:any) => {
           setMessage(prev=>({...prev,"password":"영문,숫자,특수기호 포함 8~15글자의 비밀번호를 입력해주세요."}));
           setColor(prev=>({...prev,"password":"#D1D1D1"}));
        } else {
-         setMessage(prev=>({...prev,password:"사용 가능한 비밀번호입니다."}));
-         setColor(prev=>({...prev,password:"#39A03E"}));
+         setMessage(prev=>({...prev,"password":"사용 가능한 비밀번호입니다."}));
+         setColor(prev=>({...prev,"password":"#39A03E"}));
        }
      }, [debouncedPassword]);
 
@@ -83,7 +83,7 @@ const ResultPassword = ({navigation}:any) => {
                 <Image source={xButton} style={{width: 17, height:17}}/>
             </TouchableOpacity>}
         </InputContainer>   
-        {checkPassword.length>0&& <CommentText color={color.checkPassword}>{message.checkPassword}</CommentText>}
+        {checkPassword.length>0&&<CommentText color={color.checkPassword}>{message.checkPassword}</CommentText>}
         <TouchableOpacity
             onPress={()=>handleRegisterPassword()}
         >            

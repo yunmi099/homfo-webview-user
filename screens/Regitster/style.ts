@@ -10,12 +10,12 @@ export const NotifyText = styled.Text`
     margin-top: 5%;
     margin-left: 6%;
     font-size: 16px;
-    color: #646464;
     font-weight: 400;
 `;
 export const StyledText = styled.Text`
   margin-horizontal: 6.8%;
   margin-vertical: 5%;
+  color: #0D1315;
   font-size: 18px;
 `;
 export const Block = styled.View`
@@ -45,7 +45,9 @@ export const StyledVerifybutton = styled.TouchableOpacity<StyledButtonProps>`
   margin-left: 3px;
 `;
 export const StyledTextInput = styled.TextInput`
+  padding: 0;
   height: 30px;
+  color: #D1D1D1;
 `;
 
 export const Container = styled.View`

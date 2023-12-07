@@ -28,6 +28,7 @@ export const FoundIdBox = styled.View`
 export const FoundIdText = styled.Text`
   font-size: 15px;
   margin:10px;
+  color: black;
 `
 
 export const InputContainer = styled.View`
@@ -46,8 +47,8 @@ export const StyledTextInput = styled.TextInput`
   font-size: 15px;
   font-style: normal;
   font-weight: 400;
-  line-height: normal;
   padding-left: 5px;
+  color:black;
 `
 
 export const ButtonText = styled.Text`
@@ -56,7 +57,6 @@ export const ButtonText = styled.Text`
   font-size: 19px;
   font-style: normal;
   font-weight: 600;
-  line-height: normal;
 `
 interface CommentTextProps {
   color: string; // Add a color prop
