@@ -8,18 +8,19 @@ export const Container = styled.View`
 `;
 export const TextContainer = styled.View`
     flex-direction: row;
-    margin-top: 30;
+    margin-top: 30px;
 `;
 
 export const PurpleText = styled.Text`
     color: #842CFF;
     text-align: center;
-    font-size: 25;
+    font-size: 25px;
     font-weight: 700;
 `;
 
 export const NormalText = styled.Text`
     text-align: center;
     font-size: 25;
+    color: black;
     font-weight: 400;
 `;

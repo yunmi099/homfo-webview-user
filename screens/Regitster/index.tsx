@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { Container,  Block, NotifyText, } from './style';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Header from '../../components/layout/header';
@@ -46,10 +46,12 @@ const Register = ({ navigation }: any) => {
         return true;
       }
     }
-
+  const handleNext = ()=>{
+    setStep((prev)=>prev+1);
+  }
   return (
     <KeyboardAwareScrollView 
-     contentContainerStyle={{ flex: 1}}
+      contentContainerStyle={{ flex: 1}}
       style={{backgroundColor:'white'}}
       extraScrollHeight={40}
       resetScrollToCoords={{ x: 0, y: 0 }} 
@@ -98,7 +100,7 @@ const Register = ({ navigation }: any) => {
             :<ConfirmButton 
               title="다음" 
               auth={handleButtonAuth()}
-              onPress={()=>setStep(step+1)}
+              onPress={()=>handleNext()}
              />
           }
     </KeyboardAwareScrollView>

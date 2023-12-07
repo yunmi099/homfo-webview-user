@@ -2,9 +2,8 @@ import React, { useState } from 'react'
 import { StyledText, StyledTextInput, HorizontalLine, CommentText, StyledView, StyledImage, GenderView, GenderContainer, GenderText, NGenderText, NGenderView, MiniText } from '../style'
 import RNPickerSelect from 'react-native-picker-select';
 import DatePickerModal from '../DateTimePicker';
-import { Image, StyleSheet, Text, View } from 'react-native';
+import {StyleSheet} from 'react-native';
 import { UserFormData } from '../../../store/interface/userForm';
-import * as registerIcon from '../../../assets/icons/register/registerIcon'
 import LinearGradient from 'react-native-linear-gradient';
 interface registerProps {
     formData: UserFormData;
@@ -97,11 +96,6 @@ const pickerSelectStyles = StyleSheet.create({
       marginVertical:5,
     },
     inputAndroid: {
-      marginHorizontal: 20,
-      marginVertical: 3,
-      height: 45,
-      // borderWidth:1,
-      paddingLeft: 10,
-      borderColor: "lightgrey",
+      marginHorizontal: "6.8%",
     },
   });

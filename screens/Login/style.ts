@@ -9,6 +9,7 @@ export const StyledTextInput = styled.TextInput`
   paddingLeft:20px;
   height: 5.7%;
   margin-top: 8px;
+  color: #D9D9D9;
   margin-horizontal: 7.5%;
 `;
 export const TextView = styled.Text`
@@ -19,6 +20,7 @@ export const TextView = styled.Text`
 export const StyledText = styled.Text`
   font-weight: 600;
   font-size: 25px;
+  color: #646464;
 `
 export const LoginButton = styled.TouchableOpacity`
   width: 85%;
@@ -44,6 +46,7 @@ export const VerticalLine = styled.View`
 export const TextButton = styled.Text`
   font-weight: 600;
   font-size: 13px;
+  color: #D9D9D9;
 `
 
 export const  PurpleText =  styled.Text`
